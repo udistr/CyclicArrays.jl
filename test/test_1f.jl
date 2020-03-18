@@ -31,11 +31,16 @@ grid=CircularArray(faces);
 x=reshape(collect(0:15).%4 .+1,(4,4));
 y=x'
 
-x1=CircularArray(x,faces)
-y1=CircularArray(y,faces)
+x1=CircularArray(x,grid)
+y1=CircularArray(y,grid)
 
 i=5;j=1;
 x1[i,j],y1[i,j]
 
 x1[i,j]=2
-x1
+
+@test x1[5,1]==2
+@test [x1[2,2],y1[2,2]]==[2,2]
+@test [x1[3,2],y1[3,2]]==[3,2]
+@test [x1[5,2],y1[5,2]]==[1,2]
+@test [x1[2,5],y1[2,5]]==[2,1]
