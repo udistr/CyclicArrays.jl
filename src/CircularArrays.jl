@@ -2,6 +2,13 @@ module CircularArrays
 
  include("utils.jl")
 
+ """
+     CircularArray
+ CircularArray data structure. Available constructors:
+ ```
+ CircularArray(data::AbstractArray{T,N}, connections::AbstractArray)
+ ```
+ """
  struct CircularArray{T,N} <: AbstractArray{T,N} #inherits from AbstractArray
      data::AbstractArray{T,N}
      connections::AbstractArray
@@ -42,7 +49,7 @@ module CircularArrays
   return B
  end
 
- function stagger(A::CircularArray; dims=dims::Integer, frac=frac::Real)
+ function stagger(A::CircularArray; dims=1::Integer, frac=0.5::Real)
   I=size(A.data)
   I1=[UnitRange(1:I[i]) for i in 1:length(I)]
   I2=copy(I1)
@@ -69,6 +76,7 @@ module CircularArrays
 
  function Base.getindex(A::CircularArray, I::Vararg{Int, N}) where N # implements A[I]
    S = size(A)
+   faces=A.connections
    if length(S)==1
      nz=1; ny=1; nx=S[N]; N0=4
      I=tuple(tuple(1,1,1)...,I...)
@@ -76,12 +84,16 @@ module CircularArrays
      nz=1; ny=S[N-1]; nx=S[N]; N0=4
      I=tuple(tuple(1,1)...,I...)
    elseif length(S)==3
-     nz=S[N-2]; ny=S[N-1]; nx=S[N]; N0=4
-     I=tuple(tuple(1)...,I...)
+     if (size(nfaces)[1])==1
+       nz=S[N-2]; ny=S[N-1]; nx=S[N]; N0=4
+       I=tuple(tuple(1)...,I...)
+     else
+       nz=1; ny=S[N-1]; nx=S[N]; N0=4
+       I=tuple(I[1]...,tuple(1)...,I[2:end]...)
+     end
    else
      nz=S[N-2]; ny=S[N-1]; nx=S[N]; N0=4
    end
-   faces=A.connections
    I1=[i for i in I]
 
    while (I1[N0]<1 || I1[N0]>nx) || (I1[N0-1]<1 || I1[N0-1]>ny) || (I1[N0-2]<1 || I1[N0-2]>nz)
@@ -218,8 +230,13 @@ module CircularArrays
      nz=1; ny=S[N-1]; nx=S[N]; N0=4
      I=tuple(tuple(1,1)...,I...)
    elseif length(S)==3
-     nz=S[N-2]; ny=S[N-1]; nx=S[N]; N0=4
-     I=tuple(tuple(1)...,I...)
+     if (size(nfaces)[1])==1
+       nz=S[N-2]; ny=S[N-1]; nx=S[N]; N0=4
+       I=tuple(tuple(1)...,I...)
+     else
+       nz=1; ny=S[N-1]; nx=S[N]; N0=4
+       I=tuple(I[1]...,tuple(1)...,I[2:end]...)
+     end
    else
      nz=S[N-2]; ny=S[N-1]; nx=S[N]; N0=4
    end
