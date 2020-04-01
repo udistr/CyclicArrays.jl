@@ -11,7 +11,7 @@ module CircularArrays
  """
  struct CircularArray{T,N} <: AbstractArray{T,N} #inherits from AbstractArray
      data::AbstractArray{T,N}
-     connections::AbstractArray
+     connections::Array{Int,4}
  end
 
  CircularArray(x::CircularArray)=CircularArray([],x.connections)
