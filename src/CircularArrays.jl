@@ -95,7 +95,11 @@ module CircularArrays
        i=I1[N0]
        j=I1[N0-1]
        k=I1[N0-2]
-       f=I1[N0-3]
+       if nfaces>1
+         f=I1[N0-2]
+       else
+         f=1
+       end
        if I1[N0]<1
          if connections[f,1,1,1]==-1
            return NaN
@@ -357,7 +361,11 @@ module CircularArrays
        i=I1[N0]
        j=I1[N0-1]
        k=I1[N0-2]
-       f=I1[N0-3]
+       if nfaces>1
+         f=I1[N0-2]
+       else
+         f=1
+       end
        if I1[N0]<1
          if connections[f,1,1,1]==-1
            return NaN

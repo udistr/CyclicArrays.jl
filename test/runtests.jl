@@ -14,8 +14,8 @@ destiny:
 
 # 3d array example
 
-nx=5
-ny=5
+nx=4
+ny=4
 nz=1
 nfaces=1;
 
@@ -27,13 +27,47 @@ faces[1,2,2,:]=[1,2,1,0];
 faces[1,3,1,:].=-1;
 faces[1,3,2,:].=-1;
 
+grid=CircularArray(faces,1,3);
+
+x0=reshape(collect(0:15).%4 .+1,(4,4))
+
+x=reshape(x0,(1,4,4));
+y=reshape(x0',(1,4,4));
+
+x1=CircularArray(x,grid)
+y1=CircularArray(y,grid)
+
+i=5;j=1;k=1;
+x1[k,j,i],y1[k,j,i]
+
+x1[k,i,j]=2
+
+@test x1[1,5,1]==2
+@test [x1[1,2,2],y1[1,2,2]]==[2,2]
+@test [x1[1,3,2],y1[1,3,2]]==[3,2]
+@test [x1[1,5,2],y1[1,5,2]]==[1,2]
+@test [x1[1,2,5],y1[1,2,5]]==[2,1]
+
+
+# 2d array example
+
+nx=5
+ny=5
+nfaces=1;
+
+faces=zeros(nfaces,3,2,4);
+faces[1,1,1,:]=[1,1,2,0];
+faces[1,1,2,:]=[1,1,1,0];
+faces[1,2,1,:]=[1,2,2,0];
+faces[1,2,2,:]=[1,2,1,0];
+
 grid=CircularArray(faces);
 
 x=reshape(collect(0:15).%4 .+1,(4,4));
 y=x'
 
-x1=CircularArray(x,grid)
-y1=CircularArray(y,grid)
+x1=CircularArray(x,grid,1,2)
+y1=CircularArray(y,grid,1,2)
 
 i=5;j=1;
 x1[i,j],y1[i,j]
@@ -45,6 +79,7 @@ x1[i,j]=2
 @test [x1[3,2],y1[3,2]]==[3,2]
 @test [x1[5,2],y1[5,2]]==[1,2]
 @test [x1[2,5],y1[2,5]]==[2,1]
+
 
 
 # 1d array example
