@@ -1,13 +1,6 @@
 using Test
 using CircularArrays: CircularArray,stagger
 
-nx=5
-ny=5
-nz=1
-nfaces=1;
-
-faces=zeros(nfaces,3,2,4);
-
 #=
 face: 1:nfaces
 direction:X=1 / Y=2 / Z=3,
@@ -19,6 +12,14 @@ destiny:
 4  flip 1 / no flip 0
 =#
 
+# 3d array example
+
+nx=5
+ny=5
+nz=1
+nfaces=1;
+
+faces=zeros(nfaces,3,2,4);
 faces[1,1,1,:]=[1,1,2,0];
 faces[1,1,2,:]=[1,1,1,0];
 faces[1,2,1,:]=[1,2,2,0];
@@ -44,3 +45,19 @@ x1[i,j]=2
 @test [x1[3,2],y1[3,2]]==[3,2]
 @test [x1[5,2],y1[5,2]]==[1,2]
 @test [x1[2,5],y1[2,5]]==[2,1]
+
+
+# 1d array example
+
+faces=zeros(1,1,2,4);
+faces[1,1,1,:]=[1,1,2,0];
+faces[1,1,2,:]=[1,1,1,0];
+
+grid=CircularArray(faces,1,1);
+
+#x02=ones(4,1).*[0:3;]
+x=[0:3;]
+x1=CircularArray(x,grid)
+
+@test x1[5]==0
+@test x1[0]==3
