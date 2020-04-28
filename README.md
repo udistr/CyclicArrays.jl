@@ -10,7 +10,11 @@ The connection array is a four-dimensional array defining the connections betwee
 3. Direction, size 2 (negative direction = 1, positive direction = 2)
 4. Destiny - four values pointing each (1) face, (2) dimension, and (3) direction to its neighbor. The fourth value (4) indicates whether there is a need to flip the face upside-down (0 - no-flip, 1 - flip).
 
-For example, one face with one circular x dimention will have a 1x1x2x4 connection array where:  
+### 1D example
+
+<p align="center"><img src="Images/CircularArray_example_1D.png" height=100></p>
+
+One face with one circular x dimention will have a 1x1x2x4 connection array where:  
 connections[1,1,:,:]=  
  1  1  2  0  
  1  1  1  0  
