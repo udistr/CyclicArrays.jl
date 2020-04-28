@@ -10,18 +10,32 @@ The connection array is a four-dimensional array defining the connections betwee
 3. Direction, size 2 (negative direction = 1, positive direction = 2)
 4. Destiny - four values pointing each (1) face, (2) dimension, and (3) direction to its neighbor. The fourth value (4) indicates whether there is a need to flip the face upside-down (0 - no-flip, 1 - flip).
 
-### 1D example
+### 1D, 1 face example
 
 <p align="center"><img src="Images/CircularArray_example_1D.png" height=100></p>
 
-One face with one circular x dimention will have a 1x1x2x4 connection array where:  
+One face (size N) with one circular x dimention will have a 1x1x2x4 connection array where:  
 connections[1,1,:,:]=  
  1  1  2  0  
  1  1  1  0  
  
- The first row (array indexes [1,1,1,:]) indicates that face one, x dimension, negative direction is pointing to face one, x-direction, positive direction. The second row (array indexes [1,1,2,:]) indicates that face one, x dimension, positive direction is pointing to face one, x-direction, negative direction.
+ The first row (array indexes [1,1,1,:]) indicates that face one, x dimension, negative direction is pointing to face one, x-direction, positive direction. The second row (array indexes [1,1,2,:]) indicates that face one, x dimension, positive direction is pointing to face one, x-direction, negative direction. Array fliping is not relevant in 1D array and should be set to zero (connection[:,:,:,4]=0).
  
 
+### 2D, 1 face example
+
+<p align="center"><img src="Images/CircularArray_example_2D.png" height=400></p>
+
+One face (size NxN) with circular x and y dimentions will have a 1x2x2x4 connection array where:  
+connections[1,1,:,:]=  
+ 1  1  2  0  
+ 1  1  1  0  
+connections[1,2,:,:]=  
+ 1  2  2  0  
+ 1  2  1  0  
+ 
+ connections[1,1,:,:] - The first row (array indexes [1,1,1,:]) indicates that face one, x dimension, negative direction is pointing to face one, x-direction, positive direction. The second row (array indexes [1,1,2,:]) indicates that face one, x dimension, positive direction is pointing to face one, x-direction, negative direction.  
+ connections[1,2,:,:] -  The first row (array indexes [1,2,1,:]) indicates that face one, y dimension, negative direction is pointing to face one, y-direction, positive direction. The second row (array indexes [1,2,2,:]) indicates that face one, y dimension, positive direction is pointing to face one, x dimension, negative direction. No array fliping here.
 
 
 
