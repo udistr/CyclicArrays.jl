@@ -1,5 +1,5 @@
 using Test
-using CircularArrays: CircularArray,stagger
+using CircularArrays
 
 #=
 face: 1:nfaces

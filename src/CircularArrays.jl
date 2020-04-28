@@ -1,6 +1,7 @@
 module CircularArrays
 
  include("utils.jl")
+ export CircularArray,shiftc,stagger
 
  """
      CircularArray
@@ -14,8 +15,10 @@ module CircularArrays
      connections
  end
 
- Base.show(io::IO, A::CircularArray) = print(io, A.data)
- Base.view(A::CircularArray) = print(A.data)
+ #Base.show(io::IO, A::CircularArray{T,1}) where T = Base.show(io, A.data)
+ Base.show(io::IO, ::MIME"text/plain", A::CircularArray{T,1}) where{T} =
+           print(io, length(A),"-element CircularArray{$T,1}:\n   ", A.data)
+ Base.view(A::CircularArray) = Base.view(A.data)
 
  CircularArray(x::CircularArray)=CircularArray([],x.connections)
  CircularArray(x::AbstractArray,y::CircularArray)=CircularArray(x,y.connections)
@@ -33,6 +36,8 @@ module CircularArrays
  Base.findnext(A::CircularArray, I...) = findnext(A.data, I...)
  Base.checkbounds(A::CircularArray, I...) = nothing
  Base.CartesianIndices(A::CircularArray) = CartesianIndices(A.data)
+ Base.maximum(A::CircularArray,dims) = maximum(A.data, dims=dims)
+ Base.minimum(A::CircularArray,dims) = minimum(A.data, dims=dims)
 
 
  function Base.diff(A::CircularArray, dims=dims::Integer)
@@ -69,13 +74,42 @@ module CircularArrays
   return B
  end
 
- Base.:-(A::CircularArray)=.-(A.data)
+ function shiftc(A::CircularArray; dims=1::Integer, shift=1::Real)
+   I=size(A.data)
+   I1=[UnitRange(1:I[i]) for i in 1:length(I)]
+   I2=copy(I1)
+   I2[dims]=I1[dims].+shift
+   B=CircularArray(zeros(size(A.data)),A.connections)
+   CI1=CartesianIndices(Tuple(I1))
+   CI2=CartesianIndices(Tuple(I2))
+   N=length(CI1[1])
+   for n in 1:length(CI1)
+     I1b=[CI1[n][i]  for i in 1:N]
+     I2b=[CI2[n][i]  for i in 1:N]
+     B[I1b...]=A[I2b...]
+   end
+   return B
+  end
+
+ Base.:-(A::CircularArray)=CircularArray(-A.data,A.connections)
  Base.:*(A::CircularArray, B::CircularArray)=CircularArray(.*(A.data,B.data),A.connections)
+ Base.:*(A::Number, B::CircularArray)=CircularArray(.*(A,B.data),B.connections)
+ Base.:*(A::CircularArray, B::Number)=CircularArray(.*(A.data,B),A.connections)
  Base.:-(A::CircularArray, B::CircularArray)=CircularArray(.-(A.data,B.data),A.connections)
+ Base.:-(A::Number, B::CircularArray)=CircularArray(.-(A,B.data),B.connections)
+ Base.:-(A::CircularArray, B::Number)=CircularArray(.-(A.data,B),A.connections)
  Base.:+(A::CircularArray, B::CircularArray)=CircularArray(.+(A.data,B.data),A.connections)
+ Base.:+(A::Number, B::CircularArray)=CircularArray(.+(A,B.data),B.connections)
+ Base.:+(A::CircularArray, B::Number)=CircularArray(.+(A.data,B),A.connections)
  Base.:^(A::CircularArray, B::CircularArray)=CircularArray(.^(A.data,B.data),A.connections)
+ Base.:^(A::Number, B::CircularArray)=CircularArray(.^(A,B.data),B.connections)
+ Base.:^(A::CircularArray, B::Number)=CircularArray(.^(A.data,B),A.connections)
  Base.:/(A::CircularArray, B::CircularArray)=CircularArray(./(A.data,B.data),A.connections)
+ Base.:/(A::Number, B::CircularArray)=CircularArray(./(A,B.data),B.connections)
+ Base.:/(A::CircularArray, B::Number)=CircularArray(./(A.data,B),A.connections)
  Base.:\(A::CircularArray, B::CircularArray)=CircularArray(.\(A.data,B.data),A.connections)
+ Base.:\(A::Number, B::CircularArray)=CircularArray(.\(A,B.data),B.connections)
+ Base.:\(A::CircularArray, B::Number)=CircularArray(.\(A.data,B),A.connections)
 
  function Base.getindex(A::CircularArray, I::Vararg{Int, N}) where N # implements A[I]
    connections=A.connections
@@ -341,7 +375,7 @@ module CircularArrays
    return Base.getindex(A.data,I1[N0-length(S)+1:N0]...)
  end
 
- Base.getindex(A::CircularArray, I) = (A[i] for i in I)
+ Base.getindex(A::CircularArray, I) = [ Base.getindex(A::CircularArray, i) for i in I]
 
  function Base.setindex!(A::CircularArray,value,I::Vararg{Int, N}) where N # A[I] = value
    connections=A.connections
@@ -605,11 +639,11 @@ module CircularArrays
    end
    return Base.setindex!(A.data,value,I1[N0-nspatial+1:N0]...)
  end
- Base.setindex(A::CircularArray,value, I) = (A[i] for i in I)
+ Base.setindex(A::CircularArray,value, I) = [Base.setindex(A::CircularArray,value, I) for i in I]
  Base.IndexStyle(::Type{CircularArray}) = IndexCartesian()
 
- function Base.getindex(A::CircularArray,value,I::Vararg{CartesianIndices, N}) where N
-  I1=[i for i in I]
- end
+# function Base.getindex(A::CircularArray,value,I::Vararg{CartesianIndices, N}) where N
+#  I1=[i for i in I]
+# end
 
 end # module
