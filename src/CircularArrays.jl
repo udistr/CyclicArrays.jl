@@ -17,11 +17,9 @@ module CircularArrays
  Base.show(io::IO, A::CircularArray) = print(io, A.data)
  Base.view(A::CircularArray) = print(A.data)
 
- #CircularArray(data,connections)=CircularArray(data,connections,2)
  CircularArray(x::CircularArray)=CircularArray([],x.connections)
  CircularArray(x::AbstractArray,y::CircularArray)=CircularArray(x,y.connections)
  CircularArray(connections)=CircularArray([],connections)
- #CircularArray(connections)=CircularArray([],connections)
 
  Base.ndims(A::CircularArray) = ndims(A.data)
  Base.Dims(A::CircularArray) = Dims(A.data)
