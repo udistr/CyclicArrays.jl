@@ -27,7 +27,7 @@ faces[1,2,2,:]=[1,2,1,0];
 faces[1,3,1,:].=-1;
 faces[1,3,2,:].=-1;
 
-grid=CircularArray(faces,3);
+grid=CircularArray(faces);
 
 x0=reshape(collect(0:15).%4 .+1,(4,4))
 
@@ -55,7 +55,7 @@ nx=5
 ny=5
 nfaces=1;
 
-faces=zeros(nfaces,3,2,4);
+faces=zeros(nfaces,2,2,4);
 faces[1,1,1,:]=[1,1,2,0];
 faces[1,1,2,:]=[1,1,1,0];
 faces[1,2,1,:]=[1,2,2,0];
@@ -87,7 +87,7 @@ faces=zeros(1,1,2,4);
 faces[1,1,1,:]=[1,1,2,0];
 faces[1,1,2,:]=[1,1,1,0];
 
-grid=CircularArray(faces,1);
+grid=CircularArray(faces);
 
 #x02=ones(4,1).*[0:3;]
 x=[0:3;]

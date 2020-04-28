@@ -12,17 +12,16 @@ module CircularArrays
  struct CircularArray{T,N} <: AbstractArray{T,N} #inherits from AbstractArray
      data::AbstractArray{T,N}
      connections
-     nspatial::Int
  end
 
  Base.show(io::IO, A::CircularArray) = print(io, A.data)
  Base.view(A::CircularArray) = print(A.data)
 
- CircularArray(data,connections)=CircularArray(data,connections,2)
+ #CircularArray(data,connections)=CircularArray(data,connections,2)
  CircularArray(x::CircularArray)=CircularArray([],x.connections)
- CircularArray(x::AbstractArray,y::CircularArray)=CircularArray(x,y.connections,y.nspatial)
+ CircularArray(x::AbstractArray,y::CircularArray)=CircularArray(x,y.connections)
  CircularArray(connections)=CircularArray([],connections)
- CircularArray(connections,nspatial::Int)=CircularArray([],connections,nspatial)
+ #CircularArray(connections)=CircularArray([],connections)
 
  Base.ndims(A::CircularArray) = ndims(A.data)
  Base.Dims(A::CircularArray) = Dims(A.data)
@@ -81,9 +80,9 @@ module CircularArrays
  Base.:\(A::CircularArray, B::CircularArray)=CircularArray(.\(A.data,B.data),A.connections)
 
  function Base.getindex(A::CircularArray, I::Vararg{Int, N}) where N # implements A[I]
-   nspatial=A.nspatial
    connections=A.connections
    nfaces=size(A.connections)[1]
+   nspatial=size(A.connections)[2]
    I1=[i for i in I]
    N0=length(I1)
    S=size(A)
@@ -347,9 +346,9 @@ module CircularArrays
  Base.getindex(A::CircularArray, I) = (A[i] for i in I)
 
  function Base.setindex!(A::CircularArray,value,I::Vararg{Int, N}) where N # A[I] = value
-   nspatial=A.nspatial
    connections=A.connections
    nfaces=size(A.connections)[1]
+   nspatial=size(A.connections)[2]
    I1=[i for i in I]
    N0=length(I1)
    S=size(A)
