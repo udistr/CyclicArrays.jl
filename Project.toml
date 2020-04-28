@@ -5,7 +5,9 @@ version = "0.1.0"
 
 [deps]
 GraphPlot = "a2cc645c-3eea-5389-862e-a155d0052231"
+LaTeXStrings = "b964fa9f-0449-5b57-a5c2-d3ea65f4040f"
 LightGraphs = "093fc24a-ae57-5d10-9952-331d41423f4d"
+PyPlot = "d330b81b-6aea-500a-939a-2ce795aea3ee"
 
 [compat]
 julia = "1"
