@@ -39,4 +39,4 @@ plt=plot(plot_array...,legend=false,
                    xguidefontsize=6,
                    ytickfontsize=6,
                    yguidefontsize=6, dpi=200)
-png(plt,"Diffusion_1d.png")
+png(plt,"Diffusion_1D.png")
