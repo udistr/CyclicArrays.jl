@@ -41,3 +41,11 @@ connections[1,2,:,:]=
 
 
 ## Use example
+
+Example examples/Diffusion_1D.jl will run a simple 1D diffustion equations: 
+
+![\frac{\partial \rho}{\partial t} = \frac{\partial^2 \rho}{\partial x^2}](https://render.githubusercontent.com/render/math?math=%5Cfrac%7B%5Cpartial%20%5Crho%7D%7B%5Cpartial%20t%7D%20%3D%20%5Cfrac%7B%5Cpartial%5E2%20%5Crho%7D%7B%5Cpartial%20x%5E2%7D)
+
+using the embedded function shiftc which which returns a shifted value of the array.
+
+<p align="center"><img src="examples/Diffusion_1D.png" height=400></p>
