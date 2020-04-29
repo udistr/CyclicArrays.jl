@@ -45,7 +45,8 @@ connections[1,2,:,:]=
 ### Diffusion 1D
 Example examples/Diffusion_1D.jl will run a simple 1D diffustion equations: 
 
-![\frac{\partial \rho}{\partial t} = \frac{\partial^2 \rho}{\partial x^2}](https://render.githubusercontent.com/render/math?math=%5Cfrac%7B%5Cpartial%20%5Crho%7D%7B%5Cpartial%20t%7D%20%3D%20%5Cfrac%7B%5Cpartial%5E2%20%5Crho%7D%7B%5Cpartial%20x%5E2%7D)
+![\frac{\partial \rho}{\partial t} = \frac{\partial^2 \rho}{\partial x^2}](https://render.githubusercontent.com/render/math?math=%5Cfrac%7B%5Cpartial%20%5Crho%7D%7B%5Cpartial%20t%7D%20%3D%20%5Cfrac%7B%5Cpartial%5E2%20%5Crho%7D%7B%5Cpartial%20x%5E2%7D),  
+where, ![\rho (x,t)](https://render.githubusercontent.com/render/math?math=%5Crho%20(x%2Ct)) is the density.
 
 Using the embedded function shiftc which which returns a shifted value of the array, this example integrated for 12 seconds results:
 
@@ -56,6 +57,14 @@ Using the embedded function shiftc which which returns a shifted value of the ar
 
 ### Advection 1D
 
-![\frac{\partial ( \rho \cdot \u)}{\partial t} = -u \cdot \frac{\partial ( \rho \cdot \u)}{\partial x}](https://render.githubusercontent.com/render/math?math=%5Cfrac%7B%5Cpartial%20(%20%5Crho%20%5Ccdot%20%5Cu)%7D%7B%5Cpartial%20t%7D%20%3D%20-u%20%5Ccdot%20%5Cfrac%7B%5Cpartial%20(%20%5Crho%20%5Ccdot%20%5Cu)%7D%7B%5Cpartial%20x%7D)
+Example examples/Advection_1D.jl will run a simple 1D Advection equations: 
+
+![\frac{\partial ( \rho \cdot \u)}{\partial t} = -u \cdot \frac{\partial ( \rho \cdot \u)}{\partial x}](https://render.githubusercontent.com/render/math?math=%5Cfrac%7B%5Cpartial%20(%20%5Crho%20%5Ccdot%20%5Cu)%7D%7B%5Cpartial%20t%7D%20%3D%20-u%20%5Ccdot%20%5Cfrac%7B%5Cpartial%20(%20%5Crho%20%5Ccdot%20%5Cu)%7D%7B%5Cpartial%20x%7D)  
+
+![\frac{\partial \rho}{\partial t} = -\frac{\partial ( \rho \cdot \u)}{\partial x}](https://render.githubusercontent.com/render/math?math=%5Cfrac%7B%5Cpartial%20%5Crho%7D%7B%5Cpartial%20t%7D%20%3D%20-%5Cfrac%7B%5Cpartial%20(%20%5Crho%20%5Ccdot%20%5Cu)%7D%7B%5Cpartial%20x%7D)  
+
+wherem ![\rho (x,t)](https://render.githubusercontent.com/render/math?math=%5Crho%20(x%2Ct)) and ![u (x,t)](https://render.githubusercontent.com/render/math?math=u%20(x%2Ct)) are the density and x-dimension velocity fields.
 
 
+<p align="center"><img src="examples/Advection_1D_rho.png" height=400></p>
+<p align="center"><img src="examples/Advection_1D_u.png" height=400></p>
