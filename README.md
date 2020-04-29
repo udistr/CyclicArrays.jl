@@ -8,7 +8,7 @@ The connection array is a four-dimensional array defining the connections betwee
 1. Face dimension - 1:(number of faces)
 2. Spatial dimensions, size up to three - x=1, y=2, z=3
 3. Direction, size 2 (negative direction = 1, positive direction = 2)
-4. Destiny - four values pointing each (1) face, (2) dimension, and (3) direction to its neighbor. The fourth value (4) indicates whether there is a need to flip the face upside-down (0 - no-flip, 1 - flip).
+4. Target - four values pointing each (1) face, (2) dimension, and (3) direction to its neighbor. The fourth value (4) indicates whether there is a need to flip the face upside-down (0 - no-flip, 1 - flip).
 
 ### 1D, 1 face example
 
