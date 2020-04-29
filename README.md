@@ -67,4 +67,4 @@ wherem ![\rho (x,t)](https://render.githubusercontent.com/render/math?math=%5Crh
 
 
 <p align="center"><img src="examples/Advection_1D_rho.png" height=400></p>
-<p align="center"><img src="examples/Advection_1D_u.png" height=400></p>
+<p align="center"><img src="examples/Advection_1D_u.png" height=400 border="0"></p>
