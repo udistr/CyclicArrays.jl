@@ -34,7 +34,7 @@ for i=1:NT
     if rem(i,200)==0;
         plt1=plot(x,crho1.data,ylims=(0,20),
                               title=string(i/10," seconds"))
-        plt2=plot(x,cu1.data,ylims=(0,4),
+        plt2=plot(x,cu1.data,ylims=(0,1.2),
                               title=string(i/10," seconds"))
         push!(plot_array1,plt1)
         push!(plot_array2,plt2)
