@@ -40,8 +40,9 @@ connections[1,2,:,:]=
 
 
 
-## Use example
+## Use examples
 
+### Diffusion 1D
 Example examples/Diffusion_1D.jl will run a simple 1D diffustion equations: 
 
 ![\frac{\partial \rho}{\partial t} = \frac{\partial^2 \rho}{\partial x^2}](https://render.githubusercontent.com/render/math?math=%5Cfrac%7B%5Cpartial%20%5Crho%7D%7B%5Cpartial%20t%7D%20%3D%20%5Cfrac%7B%5Cpartial%5E2%20%5Crho%7D%7B%5Cpartial%20x%5E2%7D)
@@ -49,3 +50,12 @@ Example examples/Diffusion_1D.jl will run a simple 1D diffustion equations:
 Using the embedded function shiftc which which returns a shifted value of the array, this example integrated for 12 seconds results:
 
 <p align="center"><img src="examples/Diffusion_1D.png" height=400></p>
+
+
+
+
+### Advection 1D
+
+![\frac{\partial ( \rho \cdot \u)}{\partial t} = -u \cdot \frac{\partial ( \rho \cdot \u)}{\partial x}](https://render.githubusercontent.com/render/math?math=%5Cfrac%7B%5Cpartial%20(%20%5Crho%20%5Ccdot%20%5Cu)%7D%7B%5Cpartial%20t%7D%20%3D%20-u%20%5Ccdot%20%5Cfrac%7B%5Cpartial%20(%20%5Crho%20%5Ccdot%20%5Cu)%7D%7B%5Cpartial%20x%7D)
+
+
