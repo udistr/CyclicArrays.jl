@@ -9,9 +9,9 @@ faces[1,1,1,:]=[1,1,2,0];
 faces[1,1,2,:]=[1,1,1,0];
 
 grid=CircularArray(faces);
-x=[-3:0.1:3;];
-u0=exp.(-(x).^2)
-u0=u0/sum(u0);
+x=[-1:0.01:1;];
+u0=exp.(-(x*2).^2)
+u0=u0/sum(u0)*100;
 DT=0.1;
 DX=1;
 NT=2400;
@@ -32,9 +32,9 @@ for i=1:NT
     global cu0=cu1;
     global crho0=crho1;
     if rem(i,200)==0;
-        plt1=plot(x,crho1.data,ylims=(0,4),
+        plt1=plot(x,crho1.data,ylims=(0,20),
                               title=string(i/10," seconds"))
-        plt2=plot(x,cu1.data,ylims=(0,0.1),
+        plt2=plot(x,cu1.data,ylims=(0,4),
                               title=string(i/10," seconds"))
         push!(plot_array1,plt1)
         push!(plot_array2,plt2)
