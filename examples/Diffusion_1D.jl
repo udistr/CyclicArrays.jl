@@ -24,7 +24,7 @@ for i=1:NT
     crho1=crho0+(shiftc(crho0,dims=1,shift=1) + shiftc(crho0,dims=1,shift=-1) - (2 * crho0))*DT/DX^2
     println(i," = ",(maximum(crho1)))
     global crho0=crho1;
-    if rem(i,10)==0;#3600*6/dt
+    if rem(i,10)==0;
         plt=plot(x,crho1.data,ylims=(0,0.3),
                               title=string(i/10," seconds"))
         push!(plot_array,plt)

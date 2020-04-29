@@ -335,7 +335,7 @@ module CircularArrays
      end
  # 1d array
    elseif nspatial==1
-     nx=length(A);
+     nx=size(A)[N0];
      while (I1[N0]<1 || I1[N0]>nx)
        I2=I1
        i=I1[N0]

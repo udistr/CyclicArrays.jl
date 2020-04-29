@@ -88,8 +88,6 @@ faces[1,1,1,:]=[1,1,2,0];
 faces[1,1,2,:]=[1,1,1,0];
 
 grid=CircularArray(faces);
-
-#x02=ones(4,1).*[0:3;]
 x=[0:3;]
 x1=CircularArray(x,grid)
 
