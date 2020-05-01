@@ -13,5 +13,5 @@ makedocs(
             ]
 )
 
-deploydocs( repo = "<https://github.com/udistr/CircularArrays.jl>" )
+deploydocs( repo = "github.com:udistr/CircularArrays.jl" )
 
