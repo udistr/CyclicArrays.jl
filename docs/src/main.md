@@ -12,7 +12,7 @@ The connection array is a four-dimensional array defining the connections betwee
 
 ### 1D, 1 face example
 
-<p align="center"><img src="https://github.com/udistr/CircularArrays.jl/raw/master/docs/images/CircularArrayExample1D.png" height=100></p>
+<p align="center"><img src="https://raw.githubusercontent.com/udistr/CircularArrays.jl/raw/master/docs/images/CircularArrayExample1D.png" height=100></p>
 
 One face (size N) with one circular x dimention will have a 1x1x2x4 connection array where:  
 connections[1,1,:,:]=  
@@ -24,7 +24,7 @@ connections[1,1,:,:]=
 
 ### 2D, 1 face example
 
-<p align="center"><img src="https://github.com/udistr/CircularArrays.jl/raw/master/docs/images/CircularArrayExample2D.png" height=400></p>
+<p align="center"><img src="https://raw.githubusercontent.com/udistr/CircularArrays.jl/raw/master/docs/images/CircularArrayExample2D.png" height=400></p>
 
 One face (size NxN) with circular x and y dimentions will have a 1x2x2x4 connection array where:  
 connections[1,1,:,:]=  
@@ -50,7 +50,7 @@ where, ![\rho (x,t)](https://render.githubusercontent.com/render/math?math=%5Crh
 
 Using the embedded function shiftc which which returns a shifted value of the array, this example integrated for 12 seconds results:
 
-<p align="center"><img src="https://github.com/udistr/CircularArrays.jl/blob/master/docs/images/Diffusion1D.png" height=400></p>
+<p align="center"><img src="https://raw.githubusercontent.com/udistr/CircularArrays.jl/blob/master/docs/images/Diffusion1D.png" height=400></p>
 
 
 
@@ -66,5 +66,5 @@ Example examples/Advection_1D.jl will run a simple 1D Advection equations:
 where, ![\rho (x,t)](https://render.githubusercontent.com/render/math?math=%5Crho%20(x%2Ct)) and ![u (x,t)](https://render.githubusercontent.com/render/math?math=u%20(x%2Ct)) are the density and x-dimension velocity fields.
 
 
-<p align="center"><img src="https://github.com/udistr/CircularArrays.jl/blob/master/docs/images/Advection1Drho.png" height=400></p>
-<p align="center"><img src="https://github.com/udistr/CircularArrays.jl/blob/master/docs/images/Advection1Du.png" height=420></p>
+<p align="center"><img src="https://raw.githubusercontent.com/udistr/CircularArrays.jl/blob/master/docs/images/Advection1Drho.png" height=400></p>
+<p align="center"><img src="https://raw.githubusercontent.com/udistr/CircularArrays.jl/blob/master/docs/images/Advection1Du.png" height=420></p>
