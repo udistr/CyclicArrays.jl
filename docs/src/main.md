@@ -11,8 +11,9 @@ The connection array is a four-dimensional array defining the connections betwee
 4. Destiny - four values pointing each (1) face, (2) dimension, and (3) direction to its neighbor. The fourth value (4) indicates whether there is a need to flip the face upside-down (0 - no-flip, 1 - flip).
 
 ### 1D, 1 face example
-
+```@raw html
 <p align="center"><img src="../images/CircularArrayExample1D.png" height=100></p>
+```
 
 One face (size N) with one circular x dimention will have a 1x1x2x4 connection array where:  
 connections[1,1,:,:]=  
@@ -24,7 +25,9 @@ connections[1,1,:,:]=
 
 ### 2D, 1 face example
 
+```@raw html
 <p align="center"><img src="../images/CircularArrayExample2D.png" height=400></p>
+```
 
 One face (size NxN) with circular x and y dimentions will have a 1x2x2x4 connection array where:  
 connections[1,1,:,:]=  
@@ -49,8 +52,9 @@ Example examples/Diffusion_1D.jl will run a simple 1D diffustion equations:
 where, ![\rho (x,t)](https://render.githubusercontent.com/render/math?math=%5Crho%20(x%2Ct)) is the density.
 
 Using the embedded function shiftc which which returns a shifted value of the array, this example integrated for 12 seconds results:
-
+```@raw html
 <p align="center"><img src="../images/Diffusion1D.png" height=400></p>
+```
 
 
 
@@ -65,6 +69,9 @@ Example examples/Advection_1D.jl will run a simple 1D Advection equations:
 
 where, ![\rho (x,t)](https://render.githubusercontent.com/render/math?math=%5Crho%20(x%2Ct)) and ![u (x,t)](https://render.githubusercontent.com/render/math?math=u%20(x%2Ct)) are the density and x-dimension velocity fields.
 
-
+```@raw html
 <p align="center"><img src="../images/Advection1Drho.png" height=400></p>
+```
+```@raw html
 <p align="center"><img src="../images/Advection1Du.png" height=420></p>
+```
