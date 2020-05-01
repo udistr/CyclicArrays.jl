@@ -5,7 +5,7 @@ makedocs(
     sitename = "CircularArrays",
     format = Documenter.HTML(),
     modules=[CircularArrays],
-    repo="https://github.com/udistr/CircularArrays.jl/blob/{commit}{path}#L{line}",
+    repo="git@github.com:udistr/CircularArrays.jl.git",
     authors="udistr <strobach.ehud@gmail.com>",
     pages = [
     "Home" => "index.md",
