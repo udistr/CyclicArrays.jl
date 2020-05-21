@@ -1,8 +1,8 @@
-# CircularArrays
+# CyclicArrays
 
 
-[![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://udistr.github.io/CircularArrays.jl/stable)
-[![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://udistr.github.io/CircularArrays.jl/dev)
+[![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://udistr.github.io/CyclicArrays.jl/stable)
+[![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://udistr.github.io/CyclicArrays.jl/dev)
 [![Build Status](https://travis-ci.org/udistr/CircularArrays.jl.svg?branch=master)](https://travis-ci.org/udistr/CircularArrays.jl)
 [![Codecov](https://codecov.io/gh/udistr/CircularArrays.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/udistr/CircularArrays.jl)
 [![Coveralls](https://coveralls.io/repos/github/udistr/CircularArrays.jl/badge.svg?branch=master)](https://coveralls.io/github/udistr/CircularArrays.jl?branch=master)
