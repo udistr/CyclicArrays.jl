@@ -1,4 +1,4 @@
-module CircularArrays
+module CyclicArrays
 
  include("utils.jl")
  export CircularArray,shiftc,stagger

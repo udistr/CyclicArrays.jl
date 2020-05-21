@@ -1,5 +1,5 @@
 using Test
-using CircularArrays
+using CyclicArrays
 
 #=
 face: 1:nfaces
