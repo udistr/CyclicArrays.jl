@@ -1,4 +1,4 @@
-using CircularArrays
+using CyclicArrays
 using Plots
 using Statistics
 

@@ -1,11 +1,11 @@
 using Documenter
-using CircularArrays
+using CyclicArrays
 
 makedocs(
-    sitename = "CircularArrays",
+    sitename = "CyclicArrays",
     format = Documenter.HTML(),
-    modules=[CircularArrays],
-    repo="git@github.com:udistr/CircularArrays.jl.git",
+    modules=[CyclicArrays],
+    repo="git@github.com:udistr/CyclicArrays.jl.git",
     authors="udistr <strobach.ehud@gmail.com>",
     pages = [
     "Home" => "index.md",
@@ -13,5 +13,5 @@ makedocs(
             ]
 )
 
-deploydocs( repo = "github.com:udistr/CircularArrays.jl" )
+deploydocs( repo = "github.com:udistr/CyclicArrays.jl" )
 
