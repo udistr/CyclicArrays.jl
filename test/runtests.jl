@@ -27,15 +27,15 @@ faces[1,2,2,:]=[1,2,1,0];
 faces[1,3,1,:].=-1;
 faces[1,3,2,:].=-1;
 
-grid=CircularArray(faces);
+grid=CyclicArray(faces);
 
 x0=reshape(collect(0:15).%4 .+1,(4,4))
 
 x=reshape(x0,(1,4,4));
 y=reshape(x0',(1,4,4));
 
-x1=CircularArray(x,grid)
-y1=CircularArray(y,grid)
+x1=CyclicArray(x,grid)
+y1=CyclicArray(y,grid)
 
 i=5;j=1;k=1;
 x1[k,j,i],y1[k,j,i]
@@ -61,13 +61,13 @@ faces[1,1,2,:]=[1,1,1,0];
 faces[1,2,1,:]=[1,2,2,0];
 faces[1,2,2,:]=[1,2,1,0];
 
-grid=CircularArray(faces);
+grid=CyclicArray(faces);
 
 x=reshape(collect(0:15).%4 .+1,(4,4));
 y=x'
 
-x1=CircularArray(x,grid)
-y1=CircularArray(y,grid)
+x1=CyclicArray(x,grid)
+y1=CyclicArray(y,grid)
 
 i=5;j=1;
 x1[i,j],y1[i,j]
@@ -87,9 +87,9 @@ faces=zeros(1,1,2,4);
 faces[1,1,1,:]=[1,1,2,0];
 faces[1,1,2,:]=[1,1,1,0];
 
-grid=CircularArray(faces);
+grid=CyclicArray(faces);
 x=[0:3;]
-x1=CircularArray(x,grid)
+x1=CyclicArray(x,grid)
 
 @test x1[5]==0
 @test x1[0]==3
