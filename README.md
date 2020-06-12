@@ -4,8 +4,8 @@
 [![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://udistr.github.io/CyclicArrays.jl/stable)
 [![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://udistr.github.io/CyclicArrays.jl/dev)
 [![Build Status](https://travis-ci.org/udistr/CyclicArrays.jl.svg?branch=master)](https://travis-ci.org/udistr/CyclicArrays.jl)
-[![Codecov](https://codecov.io/gh/udistr/CircularArrays.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/udistr/CircularArrays.jl)
-[![Coveralls](https://coveralls.io/repos/github/udistr/CircularArrays.jl/badge.svg?branch=master)](https://coveralls.io/github/udistr/CircularArrays.jl?branch=master)
+[![Codecov](https://codecov.io/gh/udistr/CyclicArrays.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/udistr/CyclicArrays.jl)
+[![Coveralls](https://coveralls.io/repos/github/udistr/CyclicArrays.jl/badge.svg?branch=master)](https://coveralls.io/github/udistr/CyclicArrays.jl?branch=master)
 [![DOI](https://zenodo.org/badge/248079407.svg)](https://zenodo.org/badge/latestdoi/248079407)
 
 
