@@ -11,7 +11,7 @@ The connection array is a four-dimensional array defining the connections betwee
 4. Destiny - four values pointing each (1) face, (2) dimension, and (3) direction to its neighbor. The fourth value (4) indicates whether there is a need to flip the face upside-down (0 - no-flip, 1 - flip).
 
 ### 1D, 1 face example
-<img src="https://github.com/udistr/CyclicArrays.jl/raw/master/docs/images/CyclicArrayExample1D.png" width="100%">
+![CyclicArrayExample1D](https://raw.githubusercontent.com/udistr/CyclicArrays.jl/master/docs/images/CyclicArrayExample1D.png")
 
 
 One face (size N) with one circular x dimention will have a 1x1x2x4 connection array where:  
