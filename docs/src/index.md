@@ -1,6 +1,6 @@
-# CircularArrays.jl
+# CyclicArrays.jl
 
-Documentation for CircularArrays.jl
+Documentation for CyclicArrays.jl
 
 _Contents:_
 
@@ -8,5 +8,3 @@ _Contents:_
 Pages = ["index.md","main.md"]
 Depth = 3
 ```
-
-

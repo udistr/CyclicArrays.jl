@@ -8,7 +8,7 @@ faces=zeros(1,1,2,4);
 faces[1,1,1,:]=[1,1,2,0];
 faces[1,1,2,:]=[1,1,1,0];
 
-grid=CircularArray(faces);
+grid=CyclicArray(faces);
 x=[-1:0.01:1;];
 u0=exp.(-(x*2).^2)
 u0=u0/sum(u0)*100;
@@ -18,10 +18,10 @@ NT=2400;
 
 rho0=ones(length(u0));
 
-crho0=CircularArray(rho0,grid);
-crho1=CircularArray(rho0*0,grid);
-cu0=CircularArray(u0,grid);
-cu1=CircularArray(u0*0,grid);
+crho0=CyclicArray(rho0,grid);
+crho1=CyclicArray(rho0*0,grid);
+cu0=CyclicArray(u0,grid);
+cu1=CyclicArray(u0*0,grid);
 plot_array1 = Any[]
 plot_array2 = Any[]
 for i=1:NT

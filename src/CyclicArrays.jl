@@ -1,51 +1,51 @@
 module CyclicArrays
 
  include("utils.jl")
- export CircularArray,shiftc,stagger
+ export CyclicArray,shiftc,stagger
 
  """
-     CircularArray
- CircularArray data structure. Available constructors:
+     CyclicArray
+ CyclicArray data structure. Available constructors:
  ```
- CircularArray(data::AbstractArray{T,N}, connections::AbstractArray)
+ CyclicArray(data::AbstractArray{T,N}, connections::AbstractArray)
  ```
  """
- struct CircularArray{T,N} <: AbstractArray{T,N} #inherits from AbstractArray
+ struct CyclicArray{T,N} <: AbstractArray{T,N} #inherits from AbstractArray
      data::AbstractArray{T,N}
      connections
  end
 
- #Base.show(io::IO, A::CircularArray{T,1}) where T = Base.show(io, A.data)
- Base.show(io::IO, ::MIME"text/plain", A::CircularArray{T,1}) where{T} =
-           print(io, length(A),"-element CircularArray{$T,1}:\n   ", A.data)
- Base.view(A::CircularArray) = Base.view(A.data)
+ #Base.show(io::IO, A::CyclicArray{T,1}) where T = Base.show(io, A.data)
+ Base.show(io::IO, ::MIME"text/plain", A::CyclicArray{T,1}) where{T} =
+           print(io, length(A),"-element CyclicArray{$T,1}:\n   ", A.data)
+ Base.view(A::CyclicArray) = Base.view(A.data)
 
- CircularArray(x::CircularArray)=CircularArray([],x.connections)
- CircularArray(x::AbstractArray,y::CircularArray)=CircularArray(x,y.connections)
- CircularArray(connections)=CircularArray([],connections)
+ CyclicArray(x::CyclicArray)=CyclicArray([],x.connections)
+ CyclicArray(x::AbstractArray,y::CyclicArray)=CyclicArray(x,y.connections)
+ CyclicArray(connections)=CyclicArray([],connections)
 
- Base.ndims(A::CircularArray) = ndims(A.data)
- Base.Dims(A::CircularArray) = Dims(A.data)
- Base.size(A::CircularArray) = size(A.data)
- Base.length(A::CircularArray)=length(A.data)
- Base.axes(A::CircularArray) = axes(A.data)
- Base.findall(A::CircularArray) = findall(A.data)
- Base.findfirst(A::CircularArray) = findfirst(A.data)
- Base.findlast(A::CircularArray) = findlast(A.data)
- Base.findprev(A::CircularArray, I...) = findprev(A.data, I...)
- Base.findnext(A::CircularArray, I...) = findnext(A.data, I...)
- Base.checkbounds(A::CircularArray, I...) = nothing
- Base.CartesianIndices(A::CircularArray) = CartesianIndices(A.data)
- Base.maximum(A::CircularArray,dims) = maximum(A.data, dims=dims)
- Base.minimum(A::CircularArray,dims) = minimum(A.data, dims=dims)
+ Base.ndims(A::CyclicArray) = ndims(A.data)
+ Base.Dims(A::CyclicArray) = Dims(A.data)
+ Base.size(A::CyclicArray) = size(A.data)
+ Base.length(A::CyclicArray)=length(A.data)
+ Base.axes(A::CyclicArray) = axes(A.data)
+ Base.findall(A::CyclicArray) = findall(A.data)
+ Base.findfirst(A::CyclicArray) = findfirst(A.data)
+ Base.findlast(A::CyclicArray) = findlast(A.data)
+ Base.findprev(A::CyclicArray, I...) = findprev(A.data, I...)
+ Base.findnext(A::CyclicArray, I...) = findnext(A.data, I...)
+ Base.checkbounds(A::CyclicArray, I...) = nothing
+ Base.CartesianIndices(A::CyclicArray) = CartesianIndices(A.data)
+ Base.maximum(A::CyclicArray,dims) = maximum(A.data, dims=dims)
+ Base.minimum(A::CyclicArray,dims) = minimum(A.data, dims=dims)
 
 
- function Base.diff(A::CircularArray, dims=dims::Integer)
+ function Base.diff(A::CyclicArray, dims=dims::Integer)
   I=size(A.data)
   I1=[UnitRange(1:I[i]) for i in 1:length(I)]
   I2=copy(I1)
   I2[dims]=I1[dims].+1
-  B=CircularArray(zeros(size(A.data)),A.connections)
+  B=CyclicArray(zeros(size(A.data)),A.connections)
   CI1=CartesianIndices(Tuple(I1))
   CI2=CartesianIndices(Tuple(I2))
   N=length(CI1[1])
@@ -57,12 +57,12 @@ module CyclicArrays
   return B
  end
 
- function stagger(A::CircularArray; dims=1::Integer, frac=0.5::Real)
+ function stagger(A::CyclicArray; dims=1::Integer, frac=0.5::Real)
   I=size(A.data)
   I1=[UnitRange(1:I[i]) for i in 1:length(I)]
   I2=copy(I1)
   I2[dims]=I1[dims].+Int(sign(frac))
-  B=CircularArray(zeros(size(A.data)),A.connections)
+  B=CyclicArray(zeros(size(A.data)),A.connections)
   CI1=CartesianIndices(Tuple(I1))
   CI2=CartesianIndices(Tuple(I2))
   N=length(CI1[1])
@@ -74,12 +74,12 @@ module CyclicArrays
   return B
  end
 
- function shiftc(A::CircularArray; dims=1::Integer, shift=1::Real)
+ function shiftc(A::CyclicArray; dims=1::Integer, shift=1::Real)
    I=size(A.data)
    I1=[UnitRange(1:I[i]) for i in 1:length(I)]
    I2=copy(I1)
    I2[dims]=I1[dims].+shift
-   B=CircularArray(zeros(size(A.data)),A.connections)
+   B=CyclicArray(zeros(size(A.data)),A.connections)
    CI1=CartesianIndices(Tuple(I1))
    CI2=CartesianIndices(Tuple(I2))
    N=length(CI1[1])
@@ -91,27 +91,27 @@ module CyclicArrays
    return B
   end
 
- Base.:-(A::CircularArray)=CircularArray(-A.data,A.connections)
- Base.:*(A::CircularArray, B::CircularArray)=CircularArray(.*(A.data,B.data),A.connections)
- Base.:*(A::Number, B::CircularArray)=CircularArray(.*(A,B.data),B.connections)
- Base.:*(A::CircularArray, B::Number)=CircularArray(.*(A.data,B),A.connections)
- Base.:-(A::CircularArray, B::CircularArray)=CircularArray(.-(A.data,B.data),A.connections)
- Base.:-(A::Number, B::CircularArray)=CircularArray(.-(A,B.data),B.connections)
- Base.:-(A::CircularArray, B::Number)=CircularArray(.-(A.data,B),A.connections)
- Base.:+(A::CircularArray, B::CircularArray)=CircularArray(.+(A.data,B.data),A.connections)
- Base.:+(A::Number, B::CircularArray)=CircularArray(.+(A,B.data),B.connections)
- Base.:+(A::CircularArray, B::Number)=CircularArray(.+(A.data,B),A.connections)
- Base.:^(A::CircularArray, B::CircularArray)=CircularArray(.^(A.data,B.data),A.connections)
- Base.:^(A::Number, B::CircularArray)=CircularArray(.^(A,B.data),B.connections)
- Base.:^(A::CircularArray, B::Number)=CircularArray(.^(A.data,B),A.connections)
- Base.:/(A::CircularArray, B::CircularArray)=CircularArray(./(A.data,B.data),A.connections)
- Base.:/(A::Number, B::CircularArray)=CircularArray(./(A,B.data),B.connections)
- Base.:/(A::CircularArray, B::Number)=CircularArray(./(A.data,B),A.connections)
- Base.:\(A::CircularArray, B::CircularArray)=CircularArray(.\(A.data,B.data),A.connections)
- Base.:\(A::Number, B::CircularArray)=CircularArray(.\(A,B.data),B.connections)
- Base.:\(A::CircularArray, B::Number)=CircularArray(.\(A.data,B),A.connections)
+ Base.:-(A::CyclicArray)=CyclicArray(-A.data,A.connections)
+ Base.:*(A::CyclicArray, B::CyclicArray)=CyclicArray(.*(A.data,B.data),A.connections)
+ Base.:*(A::Number, B::CyclicArray)=CyclicArray(.*(A,B.data),B.connections)
+ Base.:*(A::CyclicArray, B::Number)=CyclicArray(.*(A.data,B),A.connections)
+ Base.:-(A::CyclicArray, B::CyclicArray)=CyclicArray(.-(A.data,B.data),A.connections)
+ Base.:-(A::Number, B::CyclicArray)=CyclicArray(.-(A,B.data),B.connections)
+ Base.:-(A::CyclicArray, B::Number)=CyclicArray(.-(A.data,B),A.connections)
+ Base.:+(A::CyclicArray, B::CyclicArray)=CyclicArray(.+(A.data,B.data),A.connections)
+ Base.:+(A::Number, B::CyclicArray)=CyclicArray(.+(A,B.data),B.connections)
+ Base.:+(A::CyclicArray, B::Number)=CyclicArray(.+(A.data,B),A.connections)
+ Base.:^(A::CyclicArray, B::CyclicArray)=CyclicArray(.^(A.data,B.data),A.connections)
+ Base.:^(A::Number, B::CyclicArray)=CyclicArray(.^(A,B.data),B.connections)
+ Base.:^(A::CyclicArray, B::Number)=CyclicArray(.^(A.data,B),A.connections)
+ Base.:/(A::CyclicArray, B::CyclicArray)=CyclicArray(./(A.data,B.data),A.connections)
+ Base.:/(A::Number, B::CyclicArray)=CyclicArray(./(A,B.data),B.connections)
+ Base.:/(A::CyclicArray, B::Number)=CyclicArray(./(A.data,B),A.connections)
+ Base.:\(A::CyclicArray, B::CyclicArray)=CyclicArray(.\(A.data,B.data),A.connections)
+ Base.:\(A::Number, B::CyclicArray)=CyclicArray(.\(A,B.data),B.connections)
+ Base.:\(A::CyclicArray, B::Number)=CyclicArray(.\(A.data,B),A.connections)
 
- function Base.getindex(A::CircularArray, I::Vararg{Int, N}) where N # implements A[I]
+ function Base.getindex(A::CyclicArray, I::Vararg{Int, N}) where N # implements A[I]
    connections=A.connections
    nfaces=size(A.connections)[1]
    nspatial=size(A.connections)[2]
@@ -375,9 +375,9 @@ module CyclicArrays
    return Base.getindex(A.data,I1[N0-length(S)+1:N0]...)
  end
 
- Base.getindex(A::CircularArray, I) = [ Base.getindex(A::CircularArray, i) for i in I]
+ Base.getindex(A::CyclicArray, I) = [ Base.getindex(A::CyclicArray, i) for i in I]
 
- function Base.setindex!(A::CircularArray,value,I::Vararg{Int, N}) where N # A[I] = value
+ function Base.setindex!(A::CyclicArray,value,I::Vararg{Int, N}) where N # A[I] = value
    connections=A.connections
    nfaces=size(A.connections)[1]
    nspatial=size(A.connections)[2]
@@ -639,10 +639,10 @@ module CyclicArrays
    end
    return Base.setindex!(A.data,value,I1[N0-nspatial+1:N0]...)
  end
- Base.setindex(A::CircularArray,value, I) = [Base.setindex(A::CircularArray,value, I) for i in I]
- Base.IndexStyle(::Type{CircularArray}) = IndexCartesian()
+ Base.setindex(A::CyclicArray,value, I) = [Base.setindex(A::CyclicArray,value, I) for i in I]
+ Base.IndexStyle(::Type{CyclicArray}) = IndexCartesian()
 
-# function Base.getindex(A::CircularArray,value,I::Vararg{CartesianIndices, N}) where N
+# function Base.getindex(A::CyclicArray,value,I::Vararg{CartesianIndices, N}) where N
 #  I1=[i for i in I]
 # end
 
