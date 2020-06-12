@@ -6,6 +6,8 @@
 [![Build Status](https://travis-ci.org/udistr/CyclicArrays.jl.svg?branch=master)](https://travis-ci.org/udistr/CyclicArrays.jl)
 [![Codecov](https://codecov.io/gh/udistr/CyclicArrays.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/udistr/CyclicArrays.jl)
 [![Coveralls](https://coveralls.io/repos/github/udistr/CyclicArrays.jl/badge.svg?branch=master)](https://coveralls.io/github/udistr/CyclicArrays.jl?branch=master)
+[![DOI](https://zenodo.org/badge/248079407.svg)](https://zenodo.org/badge/latestdoi/248079407)
+
 
 
 CyclicArrays allow for the intuitive definition of circular domain composed of one or more faces, and each face has two directions for each dimension. After the definition of the connection between different faces, out-of-boundary indexes will be permitted. The CyclicArray structure includes two fields - data array and connection array. The data array containing the data values and the connection array containing the information on the connections between faces and their sides.
@@ -69,7 +71,7 @@ Example examples/Advection_1D.jl will run a simple 1D Advection equations:
 
 ![\frac{\partial ( \rho \cdot \u)}{\partial t} = -u \cdot \frac{\partial ( \rho \cdot \u)}{\partial x}](https://render.githubusercontent.com/render/math?math=%5Cfrac%7B%5Cpartial%20(%20%5Crho%20%5Ccdot%20%5Cu)%7D%7B%5Cpartial%20t%7D%20%3D%20-u%20%5Ccdot%20%5Cfrac%7B%5Cpartial%20(%20%5Crho%20%5Ccdot%20%5Cu)%7D%7B%5Cpartial%20x%7D)  
 
-![\frac{\partial \rho}{\partial t} = -\frac{\partial ( \rho \cdot \u)}{\partial x}](https://render.githubusercontent.com/render/math?math=%5Cfrac%7B%5Cpartial%20%5Crho%7D%7B%5Cpartial%20t%7D%20%3D%20-%5Cfrac%7B%5Cpartial%20(%20%5Crho%20%5Ccdot%20%5Cu)%7D%7B%5Cpartial%20x%7D)  
+![\frac{\partial \rho}{\partial t} = -\frac{\partial ( \rho \cdot u)}{\partial x}](https://render.githubusercontent.com/render/math?math=%5Cfrac%7B%5Cpartial%20%5Crho%7D%7B%5Cpartial%20t%7D%20%3D%20-%5Cfrac%7B%5Cpartial%20(%20%5Crho%20%5Ccdot%20u)%7D%7B%5Cpartial%20x%7D)
 
 where, ![\rho (x,t)](https://render.githubusercontent.com/render/math?math=%5Crho%20(x%2Ct)) and ![u (x,t)](https://render.githubusercontent.com/render/math?math=u%20(x%2Ct)) are the density and x-dimension velocity fields.
 
