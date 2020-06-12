@@ -3,9 +3,11 @@
 
 [![Stable](https://img.shields.io/badge/docs-stable-blue.svg)](https://udistr.github.io/CyclicArrays.jl/stable)
 [![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://udistr.github.io/CyclicArrays.jl/dev)
-[![Build Status](https://travis-ci.org/udistr/CircularArrays.jl.svg?branch=master)](https://travis-ci.org/udistr/CircularArrays.jl)
+[![Build Status](https://travis-ci.org/udistr/CyclicArrays.jl.svg?branch=master)](https://travis-ci.org/udistr/CyclicArrays.jl)
 [![Codecov](https://codecov.io/gh/udistr/CircularArrays.jl/branch/master/graph/badge.svg)](https://codecov.io/gh/udistr/CircularArrays.jl)
 [![Coveralls](https://coveralls.io/repos/github/udistr/CircularArrays.jl/badge.svg?branch=master)](https://coveralls.io/github/udistr/CircularArrays.jl?branch=master)
+[![DOI](https://zenodo.org/badge/248079407.svg)](https://zenodo.org/badge/latestdoi/248079407)
+
 
 
 CyclicArrays allow for the intuitive definition of circular domain composed of one or more faces, and each face has two directions for each dimension. After the definition of the connection between different faces, out-of-boundary indexes will be permitted. The CyclicArray structure includes two fields - data array and connection array. The data array containing the data values and the connection array containing the information on the connections between faces and their sides.
