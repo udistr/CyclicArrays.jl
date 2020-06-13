@@ -13,5 +13,7 @@ makedocs(
             ]
 )
 
-deploydocs( repo = "github.com:udistr/CyclicArrays.jl" )
+deploydocs( repo = "github.com:udistr/CyclicArrays.jl",
+            versions = ["stable" => "v^", "v0.#.#"]
+)
 
