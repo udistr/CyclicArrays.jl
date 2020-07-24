@@ -52,7 +52,7 @@ where, ![\rho (x,t)](https://render.githubusercontent.com/render/math?math=%5Crh
 
 Using the embedded function shiftc which which returns a shifted value of the array, this example integrated for 12 seconds results:
 
-![Diffusion1D](https://raw.githubusercontent.com/udistr/CyclicArrays.jl/master/docs/images/Diffusion1D.png)
+![Diffusion1D](https://raw.githubusercontent.com/udistr/CyclicArrays.jl/master/docs/images/Diffusion1D.gif)
 
 
 
@@ -67,5 +67,4 @@ Example examples/Advection_1D.jl will run a simple 1D Advection equations:
 
 where, ![\rho (x,t)](https://render.githubusercontent.com/render/math?math=%5Crho%20(x%2Ct)) and ![u (x,t)](https://render.githubusercontent.com/render/math?math=u%20(x%2Ct)) are the density and x-dimension velocity fields.
 
-![Advection1Drho](https://raw.githubusercontent.com/udistr/CyclicArrays.jl/master/docs/images/Advection1Drho.png)
-![Advection1Du](https://raw.githubusercontent.com/udistr/CyclicArrays.jl/master/docs/images/Advection1Du.png)
+![Advection1D](https://raw.githubusercontent.com/udistr/CyclicArrays.jl/master/docs/images/Advection1D.gif)
