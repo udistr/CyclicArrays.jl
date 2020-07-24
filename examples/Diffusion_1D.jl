@@ -35,4 +35,4 @@ anim = @animate for i ∈ 1:NT
     push!(plot_array,plt)
     println(mean(crho1))
 end
-gif(anim, "Diffusion_1D.gif", fps = 30)
+gif(anim, "Diffusion1D.gif", fps = 30)
