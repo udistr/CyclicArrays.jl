@@ -77,3 +77,16 @@ where, ![\rho (x,t)](https://render.githubusercontent.com/render/math?math=%5Crh
 
 
 <p align="center"><img src="examples/Advection1D.gif" height=400></p>
+
+
+
+
+### Random Flow
+
+Example examples/RandomFlow_2D.jl simulates the trajectories of a particle cloud in a randomly generated flow field, given the stream function:
+
+f(y,x) = sin(x) + sin(y) $\delta$
+
+<p align="center"><img src="examples/RandomFlow_2D.gif" height=400></p>
+
+
