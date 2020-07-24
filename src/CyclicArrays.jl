@@ -1,7 +1,7 @@
 module CyclicArrays
 
  include("utils.jl")
- export CyclicArray,shiftc,stagger
+ export CyclicArray,shiftc,stagger,diff
 
  """
      CyclicArray
@@ -40,7 +40,7 @@ module CyclicArrays
  Base.minimum(A::CyclicArray,dims) = minimum(A.data, dims=dims)
 
 
- function Base.diff(A::CyclicArray, dims=dims::Integer)
+ function Base.diff(A::CyclicArray; dims=1::Integer)
   I=size(A.data)
   I1=[UnitRange(1:I[i]) for i in 1:length(I)]
   I2=copy(I1)
