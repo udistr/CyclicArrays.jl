@@ -60,7 +60,7 @@ where, ![\rho (x,t)](https://render.githubusercontent.com/render/math?math=%5Crh
 
 Using the embedded function shiftc which which returns a shifted value of the array, this example integrated for 12 seconds results:
 
-<p align="center"><img src="examples/Diffusion1D.png" height=400></p>
+<p align="center"><img src="examples/Diffusion1D.gif" height=400></p>
 
 
 
