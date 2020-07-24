@@ -76,6 +76,4 @@ Example examples/Advection_1D.jl will run a simple 1D Advection equations:
 where, ![\rho (x,t)](https://render.githubusercontent.com/render/math?math=%5Crho%20(x%2Ct)) and ![u (x,t)](https://render.githubusercontent.com/render/math?math=u%20(x%2Ct)) are the density and x-dimension velocity fields.
 
 
-<p align="center"><img src="examples/Advection1Drho.png" height=400></p>
-<p align="center"><img src="examples/Advection1Du.png" height=420></p>
-
+<p align="center"><img src="examples/Advection1D.gif" height=400></p>
