@@ -1,6 +1,9 @@
 using CyclicArrays
 using Plots
 using Statistics
+using LaTeXStrings
+
+
 
 # 1d array example
 
@@ -9,34 +12,27 @@ faces[1,1,1,:]=[1,1,2,0];
 faces[1,1,2,:]=[1,1,1,0];
 
 grid=CyclicArray(faces);
-x=[-3:0.5:3;];
+x=[-3:0.1:3;];
 rho0=exp.(-(x).^2)
-rho0=rho0/sum(rho0);
-DT=0.1;
+rho0=10*rho0/sum(rho0);
+DT=0.5;
 DX=1;
-NT=120;
+NT=400;
 rho1=zeros(length(rho0));
 
 crho0=CyclicArray(rho0,grid);
 crho1=CyclicArray(rho0*0,grid);
 plot_array = Any[]
-for i=1:NT
+anim = @animate for i ∈ 1:NT
     crho1=crho0+(shiftc(crho0,dims=1,shift=1) + shiftc(crho0,dims=1,shift=-1) - (2 * crho0))*DT/DX^2
     println(i," = ",(maximum(crho1)))
     global crho0=crho1;
-    if rem(i,10)==0;
-        plt=plot(x,crho1.data,ylims=(0,0.3),
-                              title=string(i/10," seconds"))
-        push!(plot_array,plt)
-        println(mean(crho1))
-    end
+    plt=plot(x,crho1.data,ylims=(0,0.6),
+                          title=string(i/2," seconds"),
+                          ylabel=L"\rho~~[kg~m^{-3}]",
+                          xlabel="x [m]",
+                          leg=false)
+    push!(plot_array,plt)
+    println(mean(crho1))
 end
-plt=plot(plot_array...,legend=false,
-                   titlefontsize=6,
-                   ylabel=L"\rho~~[kg~m^{-3}]",
-                   xlabel="x [m]",
-                   xtickfontsize=6,
-                   xguidefontsize=6,
-                   ytickfontsize=6,
-                   yguidefontsize=6, dpi=200)
-png(plt,"Diffusion_1D.png")
+gif(anim, "Diffusion_1D.gif", fps = 30)
