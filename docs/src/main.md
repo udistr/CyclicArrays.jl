@@ -68,3 +68,13 @@ Example examples/Advection_1D.jl will run a simple 1D Advection equations:
 where, ![\rho (x,t)](https://render.githubusercontent.com/render/math?math=%5Crho%20(x%2Ct)) and ![u (x,t)](https://render.githubusercontent.com/render/math?math=u%20(x%2Ct)) are the density and x-dimension velocity fields.
 
 ![Advection1D](https://raw.githubusercontent.com/udistr/CyclicArrays.jl/master/docs/images/Advection1D.gif)
+
+
+
+### Random Flow
+
+Example examples/RandomFlow_2D.jl simulates the trajectories of a particle cloud in a randomly generated flow field, given the stream function:
+
+f(y,x) = sin(x) + sin(y)
+
+![Advection1D](https://raw.githubusercontent.com/udistr/CyclicArrays.jl/master/docs/images/RandomFlow_2D.gif)
