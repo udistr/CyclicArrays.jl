@@ -7,10 +7,19 @@ module CyclicArrays
      CyclicArray
  CyclicArray data structure. Available constructors:
  ```
- z=CyclicArray(data::AbstractArray{T,N}, connections::AbstractArray)
- z=CyclicArray(x::CyclicArray)
- z=CyclicArray(x::AbstractArray,y::CyclicArray)
- z=CyclicArray(connections)
+ CyclicArray(data::AbstractArray{T,N}, connections::AbstractArray)
+ ```
+ To generate a new CyclicArray with the connections of x:
+ ```
+ CyclicArray(x::CyclicArray)
+ ```
+ To generate a new CyclicArray with the connections:
+ ```
+ CyclicArray(connections)
+ ```
+ To generate a new CyclicArray with the connections of y and data from x:
+ ```
+ CyclicArray(x::AbstractArray,y::CyclicArray)
  ```
  """
  struct CyclicArray{T,N} <: AbstractArray{T,N} #inherits from AbstractArray
