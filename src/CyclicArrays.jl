@@ -102,13 +102,13 @@ module CyclicArrays
   return B
  end
 
- """
+"""
     shiftc
- ```
- shiftc(A::CyclicArray; dims=1::Integer, shift=1::Real)
-  ```
- Shift array by integer
- """
+```
+shiftc(A::CyclicArray; dims=1::Integer, shift=1::Real)
+```
+Shifts array by an integer
+"""
  function shiftc(A::CyclicArray; dims=1::Integer, shift=1::Real)
    I=size(A.data)
    I1=[UnitRange(1:I[i]) for i in 1:length(I)]
