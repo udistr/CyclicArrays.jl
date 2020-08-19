@@ -4,3 +4,9 @@ CyclicArray
 ```@docs
 diff
 ```
+```@docs
+stagger
+```
+```@docs
+shiftc
+```
