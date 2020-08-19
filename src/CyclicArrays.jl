@@ -50,16 +50,17 @@ module CyclicArrays
  Base.maximum(A::CyclicArray,dims) = maximum(A.data, dims=dims)
  Base.minimum(A::CyclicArray,dims) = minimum(A.data, dims=dims)
 
- function Base.diff(A::CyclicArray; dims=1::Integer)
-  """
-  diff
-  ```
-  diff(A::CyclicArray)
-  diff(A::CyclicArray; dims::Integer)
+ """
+    diff
+ ```
+ diff(A::CyclicArray)
+ diff(A::CyclicArray; dims::Integer)
 
-  Finite difference operator on a vector or a multidimensional array A. In the latter case the dimension to operate on needs to be
-  specified with the dims keyword argument.
-  """
+ Finite difference operator on a vector or a multidimensional array A. In the latter case the dimension to operate on needs to be
+ specified with the dims keyword argument.
+ ```
+ """
+ function Base.diff(A::CyclicArray; dims=1::Integer)
   I=size(A.data)
   I1=[UnitRange(1:I[i]) for i in 1:length(I)]
   I2=copy(I1)
