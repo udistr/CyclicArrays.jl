@@ -52,13 +52,14 @@ module CyclicArrays
 
  """
     diff
+
  ```
  diff(A::CyclicArray)
  diff(A::CyclicArray; dims::Integer)
+ ```
 
  Finite difference operator on a vector or a multidimensional array A. In the latter case the dimension to operate on needs to be
  specified with the dims keyword argument.
- ```
  """
  function Base.diff(A::CyclicArray; dims=1::Integer)
   I=size(A.data)
@@ -77,6 +78,13 @@ module CyclicArrays
   return B
  end
 
+ """
+    stagger
+ ```
+ stagger(A::CyclicArray; dims=1::Integer, frac=0.5::Real)
+ ```
+ Linear interpolation of the array to intermidiate grid positions
+ """
  function stagger(A::CyclicArray; dims=1::Integer, frac=0.5::Real)
   I=size(A.data)
   I1=[UnitRange(1:I[i]) for i in 1:length(I)]
@@ -94,6 +102,13 @@ module CyclicArrays
   return B
  end
 
+ """
+    shiftc
+ ```
+ shiftc(A::CyclicArray; dims=1::Integer, shift=1::Real)
+  ```
+ Shift array by integer
+ """
  function shiftc(A::CyclicArray; dims=1::Integer, shift=1::Real)
    I=size(A.data)
    I1=[UnitRange(1:I[i]) for i in 1:length(I)]
