@@ -1,3 +1,6 @@
 ```@docs
 CyclicArray
 ```
+```@docs
+diff
+```
