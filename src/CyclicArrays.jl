@@ -27,15 +27,14 @@ module CyclicArrays
      connections
  end
 
- #Base.show(io::IO, A::CyclicArray{T,1}) where T = Base.show(io, A.data)
- Base.show(io::IO, ::MIME"text/plain", A::CyclicArray{T,1}) where{T} =
-           print(io, length(A),"-element CyclicArray{$T,1}:\n   ", A.data)
- Base.view(A::CyclicArray) = Base.view(A.data)
-
  CyclicArray(x::CyclicArray)=CyclicArray([],x.connections)
  CyclicArray(x::AbstractArray,y::CyclicArray)=CyclicArray(x,y.connections)
  CyclicArray(connections)=CyclicArray([],connections)
 
+ #Base.show(io::IO, A::CyclicArray{T,1}) where T = Base.show(io, A.data)
+ Base.show(io::IO, ::MIME"text/plain", A::CyclicArray{T,1}) where{T} =
+           print(io, length(A),"-element CyclicArray{$T,1}:\n   ", A.data)
+ Base.view(A::CyclicArray) = Base.view(A.data)
  Base.ndims(A::CyclicArray) = ndims(A.data)
  Base.Dims(A::CyclicArray) = Dims(A.data)
  Base.size(A::CyclicArray) = size(A.data)
@@ -51,8 +50,16 @@ module CyclicArrays
  Base.maximum(A::CyclicArray,dims) = maximum(A.data, dims=dims)
  Base.minimum(A::CyclicArray,dims) = minimum(A.data, dims=dims)
 
-
  function Base.diff(A::CyclicArray; dims=1::Integer)
+  """
+  diff
+  ```
+  diff(A::CyclicArray)
+  diff(A::CyclicArray; dims::Integer)
+
+  Finite difference operator on a vector or a multidimensional array A. In the latter case the dimension to operate on needs to be
+  specified with the dims keyword argument.
+  """
   I=size(A.data)
   I1=[UnitRange(1:I[i]) for i in 1:length(I)]
   I2=copy(I1)
