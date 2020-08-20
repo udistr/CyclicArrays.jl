@@ -1,14 +1,22 @@
 # CyclicArrays
 
-CyclicArrays allow for the intuitive definition of circular domain composed of one or more faces, and each face has two directions for each dimension. After the definition of the connection between different faces, out-of-boundary indexes will be permitted. The CyclicArray structure includes two fields - data array and connection array. The data array containing the data values and the connection array containing the information on the connections between faces and their sides.
+CyclicArrays allow for the intuitive definition of a circular domain composed of one or more arrays, where the faces of the arrays are interconnected. Each array will have two directions (positive and negative) and up to three space dimensions (x,y,z). After the definition of the connection between different faces, out-of-boundary indexes will be permitted. The CyclicArray structure includes two fields - data array and connection array. The data array containing the data values and the connection array containing the information on the connections between faces and their sides.
 
 ## The connection array
 
 The connection array is a four-dimensional array defining the connections between faces:
-1. Face dimension - 1:(number of faces)
+1. Array dimension - 1:(number of arrays)
 2. Spatial dimensions, size up to three - x=1, y=2, z=3
 3. Direction, size 2 (negative direction = 1, positive direction = 2)
-4. Destiny - four values pointing each (1) face, (2) dimension, and (3) direction to its neighbor. The fourth value (4) indicates whether there is a need to flip the face upside-down (0 - no-flip, 1 - flip).
+4. Target - four values that point each array, dimension, and direction to its neighbor. The first three values indicate the neighbor array, dimension and direction. The fourth value indicates whether there is a need to flip the face upside-down (0 - no-flip, 1 - flip).
+
+## Important notes
+* A face without connection should get four -1 values. An attempt to get the index adjacent to a non-connected face will return NaN value.
+* The cyclic dimensions should be the last ones. For example, a 3D space problem with several faces and time dimensions should be ordered as (time, face, z, y, x). Any other dimension should come before the face dimension).
+* The z dimension is not fully implemented. Different faces can be stacked above and below, but not rotated or connected to other horizontal dimensions. Similarly, x and y dimensions cannot connect to the z dimension.
+* Note that the horizontal dimensions should be equal for connection to be made between them - length(xdim) = length(ydim).
+
+## Examples
 
 ### 1D, 1 face example
 ![CyclicArrayExample1D](https://raw.githubusercontent.com/udistr/CyclicArrays.jl/master/docs/images/CyclicArrayExample1D.png)
