@@ -146,32 +146,32 @@ Shifts array by an integer
  Base.:-(A::CyclicArray, B::CyclicArray)=CyclicArray(.-(A.data,B.data),A.connections)
  Base.:-(A::Number, B::CyclicArray)=CyclicArray(.-(A,B.data),B.connections)
  Base.:-(A::CyclicArray, B::Number)=CyclicArray(.-(A.data,B),A.connections)
- Base.:-(A::Array{T,2} where T, B::CyclicArray{T,2} where T)=CyclicArray(.-(A,B.data),B.connections)
- Base.:-(A::CyclicArray{T,2} where T, B::Array{T,2} where T)=CyclicArray(.-(A.data,B),A.connections)
+ Base.:-(A::Array, B::CyclicArray)=CyclicArray(.-(A,B.data),B.connections)
+ Base.:-(A::CyclicArray, B::Array)=CyclicArray(.-(A.data,B),A.connections)
 
  Base.:+(A::CyclicArray, B::CyclicArray)=CyclicArray(.+(A.data,B.data),A.connections)
  Base.:+(A::Number, B::CyclicArray)=CyclicArray(.+(A,B.data),B.connections)
  Base.:+(A::CyclicArray, B::Number)=CyclicArray(.+(A.data,B),A.connections)
- Base.:+(A::Array{T,2} where T, B::CyclicArray{T,2} where T)=CyclicArray(.+(A,B.data),B.connections)
- Base.:+(A::CyclicArray{T,2} where T, B::Array{T,2} where T)=CyclicArray(.+(A.data,B),A.connections)
+ Base.:+(A::Array, B::CyclicArray)=CyclicArray(.+(A,B.data),B.connections)
+ Base.:+(A::CyclicArray, B::Array)=CyclicArray(.+(A.data,B),A.connections)
 
  Base.:^(A::CyclicArray, B::CyclicArray)=CyclicArray(.^(A.data,B.data),A.connections)
  Base.:^(A::Number, B::CyclicArray)=CyclicArray(.^(A,B.data),B.connections)
  Base.:^(A::CyclicArray, B::Number)=CyclicArray(.^(A.data,B),A.connections)
- Base.:^(A::Array{T,2} where T, B::CyclicArray{T,2} where T)=CyclicArray(.^(A,B.data),B.connections)
- Base.:^(A::CyclicArray{T,2} where T, B::Array{T,2} where T)=CyclicArray(.^(A.data,B),A.connections)
+ Base.:^(A::Array, B::CyclicArray)=CyclicArray(.^(A,B.data),B.connections)
+ Base.:^(A::CyclicArray, B::Array)=CyclicArray(.^(A.data,B),A.connections)
 
  Base.:/(A::CyclicArray, B::CyclicArray)=CyclicArray(./(A.data,B.data),A.connections)
  Base.:/(A::Number, B::CyclicArray)=CyclicArray(./(A,B.data),B.connections)
  Base.:/(A::CyclicArray, B::Number)=CyclicArray(./(A.data,B),A.connections)
- Base.:/(A::Array{T,2} where T, B::CyclicArray{T,2} where T)=CyclicArray(./(A,B.data),B.connections)
- Base.:/(A::CyclicArray{T,2} where T, B::Array{T,2} where T)=CyclicArray(./(A.data,B),A.connections)
+ Base.:/(A::Array, B::CyclicArray)=CyclicArray(./(A,B.data),B.connections)
+ Base.:/(A::CyclicArray, B::Array)=CyclicArray(./(A.data,B),A.connections)
 
  Base.:\(A::CyclicArray, B::CyclicArray)=CyclicArray(.\(A.data,B.data),A.connections)
  Base.:\(A::Number, B::CyclicArray)=CyclicArray(.\(A,B.data),B.connections)
  Base.:\(A::CyclicArray, B::Number)=CyclicArray(.\(A.data,B),A.connections)
- Base.:\(A::Array{T,2} where T, B::CyclicArray{T,2} where T)=CyclicArray(.\(A,B.data),B.connections)
- Base.:\(A::CyclicArray{T,2} where T, B::Array{T,2} where T)=CyclicArray(.\(A.data,B),A.connections)
+ Base.:\(A::Array, B::CyclicArray)=CyclicArray(.\(A,B.data),B.connections)
+ Base.:\(A::CyclicArray, B::Array)=CyclicArray(.\(A.data,B),A.connections)
 
  function Base.getindex(A::CyclicArray, I::Vararg{Int, N}) where N # implements A[I]
   connections=A.connections
