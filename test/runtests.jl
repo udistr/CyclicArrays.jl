@@ -80,6 +80,15 @@ x1[i,j]=2
 @test [x1[5,2],y1[5,2]]==[1,2]
 @test [x1[2,5],y1[2,5]]==[2,1]
 
+z1=CyclicArray(ones(1,4,4),grid)
+
+@test z1.data==(z1*z1.data).data
+@test z1.data==(z1+z1.data).data/2
+@test z1.data==(z1-z1.data).data.+1
+@test z1.data==(z1^z1.data).data
+@test z1.data==(z1/z1.data).data
+@test z1.data==(z1\z1.data).data
+
 
 # 1d array example
 

@@ -31,17 +31,28 @@ module CyclicArrays
  CyclicArray(x::AbstractArray,y::CyclicArray)=CyclicArray(x,y.connections)
  CyclicArray(connections)=CyclicArray([],connections)
 
+ #CyclicArray(connections)=CyclicArray([],connections)
+ #CyclicArray(x::CyclicArray)=CyclicArray([],x.connections)
+ #= function CyclicArray_sym(x::AbstractArray,y::CyclicArray)
+  if length(size(x))<size(y.connections)[2]
+    error(string("number of array dimensions should be larger or equal to the spatial dimensions (",size(y.connections)[2],")"))
+  end
+  return CyclicArray(x,y.connections)
+ end
+ CyclicArray(x::AbstractArray,y::CyclicArray)=CyclicArray_sym(x,y)
+=#
+ #CyclicArray(x::AbstractArray,y::CyclicArray)=CyclicArray(x,y.connections)
+
  #Base.show(io::IO, A::CyclicArray{T,1}) where T = Base.show(io, A.data)
  
- Base.show(io::IO, ::MIME"text/plain", A::CyclicArray{T}) where{T} =
-           println(io, length(A),"-element CyclicArray{$T}:\n   ", A.data)
+ Base.show(io::IO, ::MIME"text/plain", A::CyclicArray{T}) where{T} =           println(io, length(A),"-element CyclicArray{$T}:\n   ", A.data)
  Base.view(A::CyclicArray) = Base.view(A.data)
  Base.ndims(A::CyclicArray) = ndims(A.data)
  Base.Dims(A::CyclicArray) = Dims(A.data)
 
  Base.size(A::CyclicArray) = size(A.data)
- Base.IndexStyle(A::CyclicArray) = IndexStyle(A.data)
- #Base.iterate(A::CyclicArray)=iterate(A.data)
+ #Base.IndexStyle(A::CyclicArray) = IndexStyle(A.data)
+ Base.iterate(A::CyclicArray)=iterate(A.data)
  Base.length(A::CyclicArray)=length(A.data)
  Base.similar(A::CyclicArray)=CyclicArray(Array{eltype(A.data)}(undef, size(A.data)),A.connections)
  Base.similar(A::CyclicArray, S::DataType)=CyclicArray(Array{S}(undef, size(A.data)),A.connections)
@@ -135,43 +146,44 @@ Shifts array by an integer
    return B
   end
 
- Base.:-(A::CyclicArray)=CyclicArray(-A.data,A.connections)
+ Base.:-(A::CyclicArray)=CyclicArray(.-A.data,A.connections)
 
- Base.:*(A::CyclicArray, B::CyclicArray)=CyclicArray(.*(A.data,B.data),A.connections)
+ Base.:*(A::CyclicArray, B::CyclicArray)=CyclicArray(*(A.data,B.data),A.connections)
  Base.:*(A::Array, B::CyclicArray)=CyclicArray(.*(A,B.data),B.connections)
  Base.:*(A::CyclicArray, B::Array)=CyclicArray(.*(A.data,B),A.connections)
  Base.:*(A::Number, B::CyclicArray)=CyclicArray(.*(A,B.data),B.connections)
  Base.:*(A::CyclicArray, B::Number)=CyclicArray(.*(A.data,B),A.connections)
 
- Base.:-(A::CyclicArray, B::CyclicArray)=CyclicArray(.-(A.data,B.data),A.connections)
+ Base.:-(A::CyclicArray, B::CyclicArray)=CyclicArray(-(A.data,B.data),A.connections)
  Base.:-(A::Number, B::CyclicArray)=CyclicArray(.-(A,B.data),B.connections)
  Base.:-(A::CyclicArray, B::Number)=CyclicArray(.-(A.data,B),A.connections)
  Base.:-(A::Array, B::CyclicArray)=CyclicArray(.-(A,B.data),B.connections)
  Base.:-(A::CyclicArray, B::Array)=CyclicArray(.-(A.data,B),A.connections)
 
- Base.:+(A::CyclicArray, B::CyclicArray)=CyclicArray(.+(A.data,B.data),A.connections)
+ Base.:+(A::CyclicArray, B::CyclicArray)=CyclicArray(+(A.data,B.data),A.connections)
  Base.:+(A::Number, B::CyclicArray)=CyclicArray(.+(A,B.data),B.connections)
  Base.:+(A::CyclicArray, B::Number)=CyclicArray(.+(A.data,B),A.connections)
  Base.:+(A::Array, B::CyclicArray)=CyclicArray(.+(A,B.data),B.connections)
  Base.:+(A::CyclicArray, B::Array)=CyclicArray(.+(A.data,B),A.connections)
 
- Base.:^(A::CyclicArray, B::CyclicArray)=CyclicArray(.^(A.data,B.data),A.connections)
+ Base.:^(A::CyclicArray, B::CyclicArray)=CyclicArray(^(A.data,B.data),A.connections)
  Base.:^(A::Number, B::CyclicArray)=CyclicArray(.^(A,B.data),B.connections)
  Base.:^(A::CyclicArray, B::Number)=CyclicArray(.^(A.data,B),A.connections)
  Base.:^(A::Array, B::CyclicArray)=CyclicArray(.^(A,B.data),B.connections)
  Base.:^(A::CyclicArray, B::Array)=CyclicArray(.^(A.data,B),A.connections)
 
- Base.:/(A::CyclicArray, B::CyclicArray)=CyclicArray(./(A.data,B.data),A.connections)
+ Base.:/(A::CyclicArray, B::CyclicArray)=CyclicArray(/(A.data,B.data),A.connections)
  Base.:/(A::Number, B::CyclicArray)=CyclicArray(./(A,B.data),B.connections)
  Base.:/(A::CyclicArray, B::Number)=CyclicArray(./(A.data,B),A.connections)
  Base.:/(A::Array, B::CyclicArray)=CyclicArray(./(A,B.data),B.connections)
  Base.:/(A::CyclicArray, B::Array)=CyclicArray(./(A.data,B),A.connections)
 
- Base.:\(A::CyclicArray, B::CyclicArray)=CyclicArray(.\(A.data,B.data),A.connections)
+ Base.:\(A::CyclicArray, B::CyclicArray)=CyclicArray(\(A.data,B.data),A.connections)
  Base.:\(A::Number, B::CyclicArray)=CyclicArray(.\(A,B.data),B.connections)
  Base.:\(A::CyclicArray, B::Number)=CyclicArray(.\(A.data,B),A.connections)
  Base.:\(A::Array, B::CyclicArray)=CyclicArray(.\(A,B.data),B.connections)
  Base.:\(A::CyclicArray, B::Array)=CyclicArray(.\(A.data,B),A.connections)
+ 
 
  function Base.getindex(A::CyclicArray, I::Vararg{Int, N}) where N # implements A[I]
   connections=A.connections
