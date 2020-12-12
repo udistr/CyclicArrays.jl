@@ -28,20 +28,15 @@ module CyclicArrays
  end
 
  CyclicArray(x::CyclicArray)=CyclicArray([],x.connections)
- CyclicArray(x::AbstractArray,y::CyclicArray)=CyclicArray(x,y.connections)
  CyclicArray(connections)=CyclicArray([],connections)
-
- #CyclicArray(connections)=CyclicArray([],connections)
- #CyclicArray(x::CyclicArray)=CyclicArray([],x.connections)
- #= function CyclicArray_sym(x::AbstractArray,y::CyclicArray)
+ function CyclicArray_sym(x::AbstractArray,y::CyclicArray)
   if length(size(x))<size(y.connections)[2]
     error(string("number of array dimensions should be larger or equal to the spatial dimensions (",size(y.connections)[2],")"))
   end
   return CyclicArray(x,y.connections)
  end
  CyclicArray(x::AbstractArray,y::CyclicArray)=CyclicArray_sym(x,y)
-=#
- #CyclicArray(x::AbstractArray,y::CyclicArray)=CyclicArray(x,y.connections)
+
 
  #Base.show(io::IO, A::CyclicArray{T,1}) where T = Base.show(io, A.data)
  
