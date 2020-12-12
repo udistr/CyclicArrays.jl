@@ -148,37 +148,37 @@ Shifts array by an integer
 
  Base.:-(A::CyclicArray)=CyclicArray(.-A.data,A.connections)
 
- Base.:*(A::CyclicArray, B::CyclicArray)=CyclicArray(*(A.data,B.data),A.connections)
+ Base.:*(A::CyclicArray, B::CyclicArray)=CyclicArray(.*(A.data,B.data),A.connections)
  Base.:*(A::Array, B::CyclicArray)=CyclicArray(.*(A,B.data),B.connections)
  Base.:*(A::CyclicArray, B::Array)=CyclicArray(.*(A.data,B),A.connections)
  Base.:*(A::Number, B::CyclicArray)=CyclicArray(.*(A,B.data),B.connections)
  Base.:*(A::CyclicArray, B::Number)=CyclicArray(.*(A.data,B),A.connections)
 
- Base.:-(A::CyclicArray, B::CyclicArray)=CyclicArray(-(A.data,B.data),A.connections)
+ Base.:-(A::CyclicArray, B::CyclicArray)=CyclicArray(.-(A.data,B.data),A.connections)
  Base.:-(A::Number, B::CyclicArray)=CyclicArray(.-(A,B.data),B.connections)
  Base.:-(A::CyclicArray, B::Number)=CyclicArray(.-(A.data,B),A.connections)
  Base.:-(A::Array, B::CyclicArray)=CyclicArray(.-(A,B.data),B.connections)
  Base.:-(A::CyclicArray, B::Array)=CyclicArray(.-(A.data,B),A.connections)
 
- Base.:+(A::CyclicArray, B::CyclicArray)=CyclicArray(+(A.data,B.data),A.connections)
+ Base.:+(A::CyclicArray, B::CyclicArray)=CyclicArray(.+(A.data,B.data),A.connections)
  Base.:+(A::Number, B::CyclicArray)=CyclicArray(.+(A,B.data),B.connections)
  Base.:+(A::CyclicArray, B::Number)=CyclicArray(.+(A.data,B),A.connections)
  Base.:+(A::Array, B::CyclicArray)=CyclicArray(.+(A,B.data),B.connections)
  Base.:+(A::CyclicArray, B::Array)=CyclicArray(.+(A.data,B),A.connections)
 
- Base.:^(A::CyclicArray, B::CyclicArray)=CyclicArray(^(A.data,B.data),A.connections)
+ Base.:^(A::CyclicArray, B::CyclicArray)=CyclicArray(.^(A.data,B.data),A.connections)
  Base.:^(A::Number, B::CyclicArray)=CyclicArray(.^(A,B.data),B.connections)
  Base.:^(A::CyclicArray, B::Number)=CyclicArray(.^(A.data,B),A.connections)
  Base.:^(A::Array, B::CyclicArray)=CyclicArray(.^(A,B.data),B.connections)
  Base.:^(A::CyclicArray, B::Array)=CyclicArray(.^(A.data,B),A.connections)
 
- Base.:/(A::CyclicArray, B::CyclicArray)=CyclicArray(/(A.data,B.data),A.connections)
+ Base.:/(A::CyclicArray, B::CyclicArray)=CyclicArray(./(A.data,B.data),A.connections)
  Base.:/(A::Number, B::CyclicArray)=CyclicArray(./(A,B.data),B.connections)
  Base.:/(A::CyclicArray, B::Number)=CyclicArray(./(A.data,B),A.connections)
  Base.:/(A::Array, B::CyclicArray)=CyclicArray(./(A,B.data),B.connections)
  Base.:/(A::CyclicArray, B::Array)=CyclicArray(./(A.data,B),A.connections)
 
- Base.:\(A::CyclicArray, B::CyclicArray)=CyclicArray(\(A.data,B.data),A.connections)
+ Base.:\(A::CyclicArray, B::CyclicArray)=CyclicArray(.\(A.data,B.data),A.connections)
  Base.:\(A::Number, B::CyclicArray)=CyclicArray(.\(A,B.data),B.connections)
  Base.:\(A::CyclicArray, B::Number)=CyclicArray(.\(A.data,B),A.connections)
  Base.:\(A::Array, B::CyclicArray)=CyclicArray(.\(A,B.data),B.connections)
