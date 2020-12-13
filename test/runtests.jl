@@ -79,6 +79,9 @@ x1[i,j]=2
 @test [x1[3,2],y1[3,2]]==[3,2]
 @test [x1[5,2],y1[5,2]]==[1,2]
 @test [x1[2,5],y1[2,5]]==[2,1]
+@test x1[1:2,1:2]==x[1:2,1:2]
+@test x1[5:6,5:6]==x[1:2,1:2]
+
 
 z1=CyclicArray(ones(1,4,4),grid)
 
@@ -88,6 +91,12 @@ z1=CyclicArray(ones(1,4,4),grid)
 @test z1.data==(z1^z1.data).data
 @test z1.data==(z1/z1.data).data
 @test z1.data==(z1\z1.data).data
+
+
+z1[1,1,1]=2
+
+@test stagger(z1,dims=2,frac=0.7)[1,1,1]==1.3
+@test shiftc(z1,dims=2,shift=1)[1,2,1]==2
 
 
 # 1d array example

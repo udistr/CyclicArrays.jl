@@ -23,36 +23,38 @@ module CyclicArrays
  ```
  """
  struct CyclicArray{T,N} <: AbstractArray{T,N} #inherits from AbstractArray
-     data::AbstractArray{T,N}
-     connections
+    data::AbstractArray{T,N}
+    connections
+    function CyclicArray(data::AbstractArray{T,N},connections) where {T,N} 
+      #creates the type only with a vector x
+      if ((length(size(data)))<(size(connections)[2]))&(~isempty(data))
+        error(string("number of array dimensions should be larger or equal to the spatial dimensions (",size(connections)[2],")"))
+      else
+        return new{T,N}(data,connections)
+      end
+    end
  end
 
+ Base.size(A::CyclicArray) = size(A.data)
  CyclicArray(x::CyclicArray)=CyclicArray([],x.connections)
+ CyclicArray(x::AbstractArray,y::CyclicArray)=CyclicArray(x,y.connections)
  CyclicArray(connections)=CyclicArray([],connections)
- function CyclicArray_sym(x::AbstractArray,y::CyclicArray)
-  if length(size(x))<size(y.connections)[2]
-    error(string("number of array dimensions should be larger or equal to the spatial dimensions (",size(y.connections)[2],")"))
-  end
-  return CyclicArray(x,y.connections)
- end
- CyclicArray(x::AbstractArray,y::CyclicArray)=CyclicArray_sym(x,y)
-
 
  #Base.show(io::IO, A::CyclicArray{T,1}) where T = Base.show(io, A.data)
  
- Base.show(io::IO, ::MIME"text/plain", A::CyclicArray{T}) where{T} =           println(io, length(A),"-element CyclicArray{$T}:\n   ", A.data)
+ #Base.show(io::IO, ::MIME"text/plain", A::CyclicArray{T}) where{T} =  show(io, MIME"text/plain", A.data)
  Base.view(A::CyclicArray) = Base.view(A.data)
  Base.ndims(A::CyclicArray) = ndims(A.data)
  Base.Dims(A::CyclicArray) = Dims(A.data)
 
- Base.size(A::CyclicArray) = size(A.data)
+
  #Base.IndexStyle(A::CyclicArray) = IndexStyle(A.data)
- Base.iterate(A::CyclicArray)=iterate(A.data)
+ #Base.iterate(A::CyclicArray)=iterate(A.data)
  Base.length(A::CyclicArray)=length(A.data)
  Base.similar(A::CyclicArray)=CyclicArray(Array{eltype(A.data)}(undef, size(A.data)),A.connections)
  Base.similar(A::CyclicArray, S::DataType)=CyclicArray(Array{S}(undef, size(A.data)),A.connections)
  Base.similar(A::CyclicArray, dims::Dims)=CyclicArray(similar(A.data,dims),A.connections)
- Base.similar(A::CyclicArray, S::DataType, dims::Dims)=CyclicArray(Array{S}(undef, dims),A.connections)
+ #Base.similar(A::CyclicArray, S::DataType, dims::Dims)=CyclicArray(Array{S}(undef, dims),A.connections)
  Base.axes(A::CyclicArray) = axes(A.data)
  
  Base.findall(A::CyclicArray) = findall(A.data)
@@ -128,7 +130,7 @@ Shifts array by an integer
    I=size(A.data)
    I1=[UnitRange(1:I[i]) for i in 1:length(I)]
    I2=copy(I1)
-   I2[dims]=I1[dims].+shift
+   I2[dims]=I1[dims].-shift
    B=CyclicArray(zeros(size(A.data)),A.connections)
    CI1=CartesianIndices(Tuple(I1))
    CI2=CartesianIndices(Tuple(I2))
@@ -457,6 +459,7 @@ Shifts array by an integer
 end
 
 Base.getindex(A::CyclicArray, I) = [ Base.getindex(A::CyclicArray, i) for i in I]
+#Base.getindex(A::CyclicArray, I )= (A[i] for i in I)
 
 function Base.setindex!(A::CyclicArray,value,I::Vararg{Int, N}) where N # A[I] = value
   connections=A.connections
@@ -731,7 +734,7 @@ function Base.setindex!(A::CyclicArray,value,I::Vararg{Int, N}) where N # A[I] =
       end
     end
   end
-  return Base.setindex!(A.data,value,I1[N0-nspatial+1:N0]...)
+  return Base.setindex!(A.data,value,I1[N0-length(S)+1:N0]...)
 end
 Base.setindex(A::CyclicArray,value, I) = [Base.setindex(A::CyclicArray,value, I) for i in I]
 Base.IndexStyle(::Type{CyclicArray}) = IndexCartesian()
