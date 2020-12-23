@@ -4,3 +4,7 @@
 .DS_Store
 /dev/
 .ipynb_checkpoints/
+src/test.jl
+examples/anim_fps30.gif
+.gitignore
+examples/anim_fps30_2.gif
