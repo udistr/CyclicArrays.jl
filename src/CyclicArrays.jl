@@ -21,10 +21,19 @@ module CyclicArrays
  ```
  CyclicArray(x::AbstractArray,y::CyclicArray)
  ```
+ To generate a new CyclicArray with predifined connections:
+ ```
+ CyclicArray(x::AbstractArray,str::String)
+ ```
+ Avilable options:
+  "1D": one dimensional array, one face
+  "2D": two dimensional array, one face
+  "3D": three dimensional array, one face
+  "cubed": cubed sphere - three dimensional array, six faces
  """
  struct CyclicArray{T,N} <: AbstractArray{T,N} #inherits from AbstractArray
     data::AbstractArray{T,N}
-    connections
+    connections::Array{T,4}
     function CyclicArray(data::AbstractArray{T,N},connections) where {T,N} 
       #creates the type only with a vector x
       if ((length(size(data)))<(size(connections)[2]))&(~isempty(data))
@@ -38,22 +47,93 @@ module CyclicArrays
  Base.size(A::CyclicArray) = size(A.data)
  CyclicArray(x::CyclicArray)=CyclicArray([],x.connections)
  CyclicArray(x::AbstractArray,y::CyclicArray)=CyclicArray(x,y.connections)
- CyclicArray(connections)=CyclicArray([],connections)
-
- #Base.show(io::IO, A::CyclicArray{T,1}) where T = Base.show(io, A.data)
+ CyclicArray(connections::Array{T,4}) where T =CyclicArray([],connections)
  
- #Base.show(io::IO, ::MIME"text/plain", A::CyclicArray{T}) where{T} =  show(io, MIME"text/plain", A.data)
+ 
+ function MakeCyclicArray(x::AbstractArray,str::String)
+  if str=="1D"
+    nfaces=1;
+    faces=zeros(1,1,2,4);
+    faces[1,1,1,:]=[1,1,2,0];
+    faces[1,1,2,:]=[1,1,1,0];
+  elseif str=="2D"
+    nfaces=1;
+    faces=zeros(nfaces,2,2,4);
+    faces[1,1,1,:]=[1,1,2,0];
+    faces[1,1,2,:]=[1,1,1,0];
+    faces[1,2,1,:]=[1,2,2,0];
+    faces[1,2,2,:]=[1,2,1,0];
+  elseif str=="3D"
+    nfaces=1;
+    faces=zeros(nfaces,3,2,4);
+    faces[1,1,1,:]=[1,1,2,0];
+    faces[1,1,2,:]=[1,1,1,0];
+    faces[1,2,1,:]=[1,2,2,0];
+    faces[1,2,2,:]=[1,2,1,0];
+    faces[1,3,1,:].=-1;
+    faces[1,3,2,:].=-1;
+  elseif str=="cubed"
+    nfaces=6
+    faces=zeros(Int64,nfaces,3,2,4);
+
+    faces[1,1,1,:]=[4,1,2,0]
+    faces[1,1,2,:]=[2,1,1,0]
+    faces[1,2,1,:]=[6,2,2,0]
+    faces[1,2,2,:]=[5,2,1,0]
+    faces[1,3,1,:].=-1
+    faces[1,3,2,:].=-1
+
+    faces[2,1,1,:]=[1,1,2,0]
+    faces[2,1,2,:]=[3,1,1,0]
+    faces[2,2,1,:]=[6,1,2,1]
+    faces[2,2,2,:]=[5,1,2,0]
+    faces[2,3,1,:].=-1
+    faces[2,3,2,:].=-1
+
+    faces[3,1,1,:]=[2,1,2,0]
+    faces[3,1,2,:]=[4,1,1,0]
+    faces[3,2,1,:]=[6,2,1,1]
+    faces[3,2,2,:]=[5,2,2,1]
+    faces[3,3,1,:].=-1
+    faces[3,3,2,:].=-1
+
+    faces[4,1,1,:]=[3,1,2,0]
+    faces[4,1,2,:]=[1,1,1,0]
+    faces[4,2,1,:]=[6,1,1,0]
+    faces[4,2,2,:]=[5,1,1,1]
+    faces[4,3,1,:].=-1
+    faces[4,3,2,:].=-1
+
+    faces[5,1,1,:]=[4,2,2,1]
+    faces[5,1,2,:]=[2,2,2,0]
+    faces[5,2,1,:]=[1,2,2,0]
+    faces[5,2,2,:]=[3,2,2,0]
+    faces[5,3,1,:].=-1
+    faces[5,3,2,:].=-1
+
+    faces[6,1,1,:]=[4,2,1,0]
+    faces[6,1,2,:]=[2,2,1,1]
+    faces[6,2,1,:]=[3,2,1,1]
+    faces[6,2,2,:]=[1,2,1,0]
+    faces[6,3,1,:].=-1
+    faces[6,3,2,:].=-1
+  end
+  return CyclicArray(x,faces);
+ end
+ 
+ CyclicArray(x::AbstractArray,str::String)=MakeCyclicArray(x,str)
+ CyclicArray(str::String)=MakeCyclicArray([],str)
+
+
  Base.view(A::CyclicArray) = Base.view(A.data)
  Base.ndims(A::CyclicArray) = ndims(A.data)
  Base.Dims(A::CyclicArray) = Dims(A.data)
 
-
- #Base.IndexStyle(A::CyclicArray) = IndexStyle(A.data)
- #Base.iterate(A::CyclicArray)=iterate(A.data)
  Base.length(A::CyclicArray)=length(A.data)
  Base.similar(A::CyclicArray)=CyclicArray(Array{eltype(A.data)}(undef, size(A.data)),A.connections)
  Base.similar(A::CyclicArray, S::DataType)=CyclicArray(Array{S}(undef, size(A.data)),A.connections)
  Base.similar(A::CyclicArray, dims::Dims)=CyclicArray(similar(A.data,dims),A.connections)
+ # The next line produce error, not clear why
  #Base.similar(A::CyclicArray, S::DataType, dims::Dims)=CyclicArray(Array{S}(undef, dims),A.connections)
  Base.axes(A::CyclicArray) = axes(A.data)
  
@@ -459,7 +539,6 @@ Shifts array by an integer
 end
 
 Base.getindex(A::CyclicArray, I) = [ Base.getindex(A::CyclicArray, i) for i in I]
-#Base.getindex(A::CyclicArray, I )= (A[i] for i in I)
 
 function Base.setindex!(A::CyclicArray,value,I::Vararg{Int, N}) where N # A[I] = value
   connections=A.connections
