@@ -49,6 +49,9 @@ x1[k,j,i]=2
 @test [x1[1,2,5],y1[1,2,5]]==[2,1]
 
 
+x2=CyclicArray(x1.data,"3D")
+@test all(Bool.((x1==x2).data))
+
 # 2d array example
 
 nx=5
@@ -98,6 +101,9 @@ z1[1,1,1]=2
 @test stagger(z1,dims=2,frac=0.7)[1,1,1]==1.3
 @test shiftc(z1,dims=2,shift=1)[1,2,1]==2
 
+x2=CyclicArray(x1.data,"2D")
+@test all(Bool.((x1==x2).data))
+
 
 # 1d array example
 
@@ -112,6 +118,9 @@ x1=CyclicArray(x,grid)
 @test x1[5]==0
 @test x1[0]==3
 
+x2=CyclicArray(x,"1D")
+
+@test all(Bool.((x1==x2).data))
 
 # cubed sphere example
 
@@ -180,3 +189,5 @@ f=1;i=0;j=1;k=1;
 f=1;i=1;j=0;k=1;
 @test [a1[f,k,j,i],x1[f,k,j,i],y1[f,k,j,i]]==[6,4,1]
 
+x2=CyclicArray(x0,"cubed")
+@test all(Bool.((x1==x2).data))
