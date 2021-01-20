@@ -191,3 +191,11 @@ f=1;i=1;j=0;k=1;
 
 x2=CyclicArray(x0,"cubed")
 @test all(Bool.((x1==x2).data))
+
+# cubed sphere 2D example
+
+x0=permutedims(reshape((1:1:96)',(4,4,6)),(3,2,1))
+x1=CyclicArray(x0,"cubed2D")
+
+@test x1[3,1,0]==x1[2,1,4]
+@test x1[1,1,0]==x1[4,1,4]

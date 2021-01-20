@@ -26,10 +26,16 @@ module CyclicArrays
  CyclicArray(x::AbstractArray,str::String)
  ```
  Avilable options:
-  "1D": one dimensional array, one face
-  "2D": two dimensional array, one face
-  "3D": three dimensional array, one face
-  "cubed": cubed sphere - three dimensional array, six faces
+
+  "1D" - one dimensional array, one face
+
+  "2D" - two dimensional array, one face
+
+  "3D" - three dimensional array, one face
+
+  "cubed" - cubed sphere, three dimensional array, six faces
+
+  "cubed2D" - cubed sphere, two dimensional array, six faces
  """
  struct CyclicArray{T,N} <: AbstractArray{T,N} #inherits from AbstractArray
     data::AbstractArray{T,N}
@@ -117,6 +123,39 @@ module CyclicArrays
     faces[6,2,2,:]=[1,2,1,0]
     faces[6,3,1,:].=-1
     faces[6,3,2,:].=-1
+  elseif str=="cubed2D"
+    nfaces=6
+    faces=zeros(Int64,nfaces,2,2,4);
+
+    faces[1,1,1,:]=[4,1,2,0]
+    faces[1,1,2,:]=[2,1,1,0]
+    faces[1,2,1,:]=[6,2,2,0]
+    faces[1,2,2,:]=[5,2,1,0]
+
+    faces[2,1,1,:]=[1,1,2,0]
+    faces[2,1,2,:]=[3,1,1,0]
+    faces[2,2,1,:]=[6,1,2,1]
+    faces[2,2,2,:]=[5,1,2,0]
+
+    faces[3,1,1,:]=[2,1,2,0]
+    faces[3,1,2,:]=[4,1,1,0]
+    faces[3,2,1,:]=[6,2,1,1]
+    faces[3,2,2,:]=[5,2,2,1]
+
+    faces[4,1,1,:]=[3,1,2,0]
+    faces[4,1,2,:]=[1,1,1,0]
+    faces[4,2,1,:]=[6,1,1,0]
+    faces[4,2,2,:]=[5,1,1,1]
+
+    faces[5,1,1,:]=[4,2,2,1]
+    faces[5,1,2,:]=[2,2,2,0]
+    faces[5,2,1,:]=[1,2,2,0]
+    faces[5,2,2,:]=[3,2,2,0]
+
+    faces[6,1,1,:]=[4,2,1,0]
+    faces[6,1,2,:]=[2,2,1,1]
+    faces[6,2,1,:]=[3,2,1,1]
+    faces[6,2,2,:]=[1,2,1,0]
   end
   return CyclicArray(x,faces);
  end
