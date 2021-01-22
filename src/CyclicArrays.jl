@@ -62,9 +62,16 @@ module CyclicArrays
  function MakeCyclicArray(x::AbstractArray,str::String)
   if str=="1D"
     nfaces=1;
-    faces=zeros(1,1,2,4);
+    faces=zeros(nfaces,1,2,4);
     faces[1,1,1,:]=[1,1,2,0];
     faces[1,1,2,:]=[1,1,1,0];
+  elseif str=="1D2F"
+      nfaces=2;
+      faces=zeros(nfaces,1,2,4);
+      faces[1,1,1,:]=[2,1,2,0];
+      faces[1,1,2,:]=[2,1,1,0];
+      faces[2,1,1,:]=[1,1,2,0];
+      faces[2,1,2,:]=[1,1,1,0];
   elseif str=="2D"
     nfaces=1;
     faces=zeros(nfaces,2,2,4);
@@ -72,6 +79,13 @@ module CyclicArrays
     faces[1,1,2,:]=[1,1,1,0];
     faces[1,2,1,:]=[1,2,2,0];
     faces[1,2,2,:]=[1,2,1,0];
+  elseif str=="2DXY"
+    nfaces=1;
+    faces=zeros(nfaces,2,2,4);
+    faces[1,1,1,:]=[1,2,2,0];
+    faces[1,1,2,:]=[1,2,1,0];
+    faces[1,2,1,:]=[1,1,2,0];
+    faces[1,2,2,:]=[1,1,1,0];
   elseif str=="3D"
     nfaces=1;
     faces=zeros(nfaces,3,2,4);
@@ -79,6 +93,15 @@ module CyclicArrays
     faces[1,1,2,:]=[1,1,1,0];
     faces[1,2,1,:]=[1,2,2,0];
     faces[1,2,2,:]=[1,2,1,0];
+    faces[1,3,1,:].=-1;
+    faces[1,3,2,:].=-1;
+  elseif str=="3DXY"
+    nfaces=1;
+    faces=zeros(nfaces,3,2,4);
+    faces[1,1,1,:]=[1,2,2,0];
+    faces[1,1,2,:]=[1,2,1,0];
+    faces[1,2,1,:]=[1,1,2,0];
+    faces[1,2,2,:]=[1,1,1,0];
     faces[1,3,1,:].=-1;
     faces[1,3,2,:].=-1;
   elseif str=="cubed"
@@ -346,9 +369,7 @@ Shifts array by an integer
     nx=S[N0];ny=S[N0-1];nz=S[N0-2];
     while (I1[N0]<1 || I1[N0]>nx) || (I1[N0-1]<1 || I1[N0-1]>ny) || (I1[N0-2]<1 || I1[N0-2]>nz)
       I2=I1
-      i=I1[N0]
-      j=I1[N0-1]
-      k=I1[N0-2]
+      i=I1[N0]; j=I1[N0-1]; k=I1[N0-2]
       if nfaces>1
         f=I1[N0-3]
       else
@@ -373,6 +394,7 @@ Shifts array by an integer
           I2[N0-2] = k
           if nfaces>1; I2[N0-3]=f1 end
           I1=I2
+          i=I1[N0]; j=I1[N0-1]; k=I1[N0-2]
         end
       end
       if I1[N0]>nx
@@ -389,11 +411,12 @@ Shifts array by an integer
                   kd(axis,2) * kd(flip,1) * (nx+1-j)
           I2[N0-1] = kd(axis,1) * kd(flip,0) *  j +
                     kd(axis,1) * kd(flip,1) * (ny+1+j) +
-                    kd(axis,2) * kd(side,1) * (1-ny) +
+                    kd(axis,2) * kd(side,1) * (i-ny) +
                     kd(axis,2) * kd(side,2) * ((ny+1)-(i-ny))
           I2[N0-2] = k
           if nfaces>1; I2[N0-3]=f1 end
           I1=I2
+          i=I1[N0]; j=I1[N0-1]; k=I1[N0-2]
         end
       end
 
@@ -416,6 +439,7 @@ Shifts array by an integer
           I2[N0-2] = k
           if nfaces>1; I2[N0-3]=f1 end
           I1=I2
+          i=I1[N0]; j=I1[N0-1]; k=I1[N0-2]
         end
       end
       if I1[N0-1]>ny
@@ -437,6 +461,7 @@ Shifts array by an integer
           I2[N0-2] = k
           if nfaces>1; I2[N0-3]=f1 end
           I1=I2
+          i=I1[N0]; j=I1[N0-1]; k=I1[N0-2]
         end
       end
 
@@ -454,6 +479,7 @@ Shifts array by an integer
                     kd(axis,3) * kd(side,2) * (nz+1-(k-nz))
           if nfaces>1; I2[N0-3]=f1 end
           I1=I2
+          i=I1[N0]; j=I1[N0-1]; k=I1[N0-2]
         end
       end
       if I1[N0-2]>nz
@@ -470,6 +496,7 @@ Shifts array by an integer
                     kd(axis,3) * kd(side,2) * (nz+1-(k-nz))
           if nfaces>1; I2[N0-3]=f1 end
           I1=I2
+          i=I1[N0]; j=I1[N0-1]; k=I1[N0-2]
         end
       end
     end
@@ -478,8 +505,7 @@ Shifts array by an integer
     nx=S[N0];ny=S[N0-1]
     while (I1[N0]<1 || I1[N0]>nx) || (I1[N0-1]<1 || I1[N0-1]>ny)
       I2=I1
-      i=I1[N0]
-      j=I1[N0-1]
+      i=I1[N0]; j=I1[N0-1]
       if nfaces>1
         f=I1[N0-2]
       else
@@ -503,6 +529,7 @@ Shifts array by an integer
                     kd(axis,2) * kd(side,2) * (ny+i)
           if nfaces>1; I2[N0-2]=f1 end
           I1=I2
+          i=I1[N0]; j=I1[N0-1]
         end
       end
       if I1[N0]>nx
@@ -519,10 +546,11 @@ Shifts array by an integer
                   kd(axis,2) * kd(flip,1) * (nx+1-j)
           I2[N0-1] = kd(axis,1) * kd(flip,0) *  j +
                     kd(axis,1) * kd(flip,1) * (ny+1+j) +
-                    kd(axis,2) * kd(side,1) * (1-ny) +
+                    kd(axis,2) * kd(side,1) * (i-ny) +
                     kd(axis,2) * kd(side,2) * ((ny+1)-(i-ny))
           if nfaces>1; I2[N0-2]=f1 end
           I1=I2
+          i=I1[N0]; j=I1[N0-1]
         end
       end
 
@@ -544,6 +572,7 @@ Shifts array by an integer
                     kd(axis,2) * kd(side,2) * (ny+j)
           if nfaces>1; I2[N0-2]=f1 end
           I1=I2
+          i=I1[N0]; j=I1[N0-1]
         end
       end
       if I1[N0-1]>ny
@@ -564,6 +593,7 @@ Shifts array by an integer
                     kd(axis,2) * kd(side,2) * (ny+1-(ny-j))
           if nfaces>1; I2[N0-2]=f1 end
           I1=I2
+          i=I1[N0]; j=I1[N0-1]
         end
       end
     end
@@ -590,6 +620,7 @@ Shifts array by an integer
                    kd(axis,1) * kd(side,2) * (nx+i)
           if nfaces>1; I2[N0-1]=f1 end
           I1=I2
+          i=I1[N0]
         end
       end
       if I1[N0]>nx
@@ -604,6 +635,7 @@ Shifts array by an integer
                   kd(axis,1) * kd(side,2) * ((nx+1)-(i-nx))
           if nfaces>1; I2[N0-1]=f1 end
           I1=I2
+          i=I1[N0]
         end
       end
     end
@@ -624,11 +656,9 @@ function Base.setindex!(A::CyclicArray,value,I::Vararg{Int, N}) where N # A[I] =
     nx=S[N0];ny=S[N0-1];nz=S[N0-2];
     while (I1[N0]<1 || I1[N0]>nx) || (I1[N0-1]<1 || I1[N0-1]>ny) || (I1[N0-2]<1 || I1[N0-2]>nz)
       I2=I1
-      i=I1[N0]
-      j=I1[N0-1]
-      k=I1[N0-2]
+      i=I1[N0]; j=I1[N0-1]; k=I1[N0-2]
       if nfaces>1
-        f=I1[N0-2]
+        f=I1[N0-3]
       else
         f=1
       end
@@ -651,6 +681,7 @@ function Base.setindex!(A::CyclicArray,value,I::Vararg{Int, N}) where N # A[I] =
           I2[N0-2] = k
           if nfaces>1; I2[N0-3]=f1 end
           I1=I2
+          i=I1[N0]; j=I1[N0-1]; k=I1[N0-2]
         end
       end
       if I1[N0]>nx
@@ -667,11 +698,12 @@ function Base.setindex!(A::CyclicArray,value,I::Vararg{Int, N}) where N # A[I] =
                   kd(axis,2) * kd(flip,1) * (nx+1-j)
           I2[N0-1] = kd(axis,1) * kd(flip,0) *  j +
                     kd(axis,1) * kd(flip,1) * (ny+1+j) +
-                    kd(axis,2) * kd(side,1) * (1-ny) +
+                    kd(axis,2) * kd(side,1) * (i-ny) +
                     kd(axis,2) * kd(side,2) * ((ny+1)-(i-ny))
           I2[N0-2] = k
           if nfaces>1; I2[N0-3]=f1 end
           I1=I2
+          i=I1[N0]; j=I1[N0-1]; k=I1[N0-2]
         end
       end
 
@@ -694,6 +726,7 @@ function Base.setindex!(A::CyclicArray,value,I::Vararg{Int, N}) where N # A[I] =
           I2[N0-2] = k
           if nfaces>1; I2[N0-3]=f1 end
           I1=I2
+          i=I1[N0]; j=I1[N0-1]; k=I1[N0-2]
         end
       end
       if I1[N0-1]>ny
@@ -715,6 +748,7 @@ function Base.setindex!(A::CyclicArray,value,I::Vararg{Int, N}) where N # A[I] =
           I2[N0-2] = k
           if nfaces>1; I2[N0-3]=f1 end
           I1=I2
+          i=I1[N0]; j=I1[N0-1]; k=I1[N0-2]
         end
       end
 
@@ -732,6 +766,7 @@ function Base.setindex!(A::CyclicArray,value,I::Vararg{Int, N}) where N # A[I] =
                     kd(axis,3) * kd(side,2) * (nz+1-(k-nz))
           if nfaces>1; I2[N0-3]=f1 end
           I1=I2
+          i=I1[N0]; j=I1[N0-1]; k=I1[N0-2]
         end
       end
       if I1[N0-2]>nz
@@ -748,6 +783,7 @@ function Base.setindex!(A::CyclicArray,value,I::Vararg{Int, N}) where N # A[I] =
                     kd(axis,3) * kd(side,2) * (nz+1-(k-nz))
           if nfaces>1; I2[N0-3]=f1 end
           I1=I2
+          i=I1[N0]; j=I1[N0-1]; k=I1[N0-2]
         end
       end
     end
@@ -756,8 +792,7 @@ function Base.setindex!(A::CyclicArray,value,I::Vararg{Int, N}) where N # A[I] =
     nx=S[N0];ny=S[N0-1]
     while (I1[N0]<1 || I1[N0]>nx) || (I1[N0-1]<1 || I1[N0-1]>ny)
       I2=I1
-      i=I1[N0]
-      j=I1[N0-1]
+      i=I1[N0]; j=I1[N0-1]
       if nfaces>1
         f=I1[N0-2]
       else
@@ -781,6 +816,7 @@ function Base.setindex!(A::CyclicArray,value,I::Vararg{Int, N}) where N # A[I] =
                     kd(axis,2) * kd(side,2) * (ny+i)
           if nfaces>1; I2[N0-2]=f1 end
           I1=I2
+          i=I1[N0]; j=I1[N0-1]
         end
       end
       if I1[N0]>nx
@@ -797,10 +833,11 @@ function Base.setindex!(A::CyclicArray,value,I::Vararg{Int, N}) where N # A[I] =
                   kd(axis,2) * kd(flip,1) * (nx+1-j)
           I2[N0-1] = kd(axis,1) * kd(flip,0) *  j +
                     kd(axis,1) * kd(flip,1) * (ny+1+j) +
-                    kd(axis,2) * kd(side,1) * (1-ny) +
+                    kd(axis,2) * kd(side,1) * (i-ny) +
                     kd(axis,2) * kd(side,2) * ((ny+1)-(i-ny))
           if nfaces>1; I2[N0-2]=f1 end
           I1=I2
+          i=I1[N0]; j=I1[N0-1]
         end
       end
 
@@ -822,6 +859,7 @@ function Base.setindex!(A::CyclicArray,value,I::Vararg{Int, N}) where N # A[I] =
                     kd(axis,2) * kd(side,2) * (ny+j)
           if nfaces>1; I2[N0-2]=f1 end
           I1=I2
+          i=I1[N0]; j=I1[N0-1]
         end
       end
       if I1[N0-1]>ny
@@ -842,12 +880,13 @@ function Base.setindex!(A::CyclicArray,value,I::Vararg{Int, N}) where N # A[I] =
                     kd(axis,2) * kd(side,2) * (ny+1-(ny-j))
           if nfaces>1; I2[N0-2]=f1 end
           I1=I2
+          i=I1[N0]; j=I1[N0-1]
         end
       end
     end
 # 1d array
   elseif nspatial==1
-    nx=S[N0];
+    nx=size(A)[N0];
     while (I1[N0]<1 || I1[N0]>nx)
       I2=I1
       i=I1[N0]
@@ -868,6 +907,7 @@ function Base.setindex!(A::CyclicArray,value,I::Vararg{Int, N}) where N # A[I] =
                    kd(axis,1) * kd(side,2) * (nx+i)
           if nfaces>1; I2[N0-1]=f1 end
           I1=I2
+          i=I1[N0]
         end
       end
       if I1[N0]>nx
@@ -882,6 +922,7 @@ function Base.setindex!(A::CyclicArray,value,I::Vararg{Int, N}) where N # A[I] =
                   kd(axis,1) * kd(side,2) * ((nx+1)-(i-nx))
           if nfaces>1; I2[N0-1]=f1 end
           I1=I2
+          i=I1[N0]
         end
       end
     end

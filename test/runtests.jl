@@ -52,6 +52,8 @@ x1[k,j,i]=2
 x2=CyclicArray(x1.data,"3D")
 @test all(Bool.((x1==x2).data))
 
+println("Pass 3D test")
+
 # 2d array example
 
 nx=5
@@ -104,6 +106,8 @@ z1[1,1,1]=2
 x2=CyclicArray(x1.data,"2D")
 @test all(Bool.((x1==x2).data))
 
+println("Pass 2D test")
+
 
 # 1d array example
 
@@ -121,6 +125,23 @@ x1=CyclicArray(x,grid)
 x2=CyclicArray(x,"1D")
 
 @test all(Bool.((x1==x2).data))
+
+println("Pass 1D test")
+
+# 1d array example 2 faces
+
+x=zeros(2,4)
+x[1,:]=[0:3;]
+x[2,:]=[4:7;]
+x1=CyclicArray(x,"1D2F")
+
+@test x1[1,0]==7
+@test x1[1,5]==4
+@test x1[1,9]==0
+@test x1[2,5]==0
+@test x1[2,0]==3
+
+println("Pass 1D2F test")
 
 # cubed sphere example
 
@@ -192,6 +213,8 @@ f=1;i=1;j=0;k=1;
 x2=CyclicArray(x0,"cubed")
 @test all(Bool.((x1==x2).data))
 
+println("Pass cubed sphere 3D test")
+
 # cubed sphere 2D example
 
 x0=permutedims(reshape((1:1:96)',(4,4,6)),(3,2,1))
@@ -199,3 +222,45 @@ x1=CyclicArray(x0,"cubed2D")
 
 @test x1[3,1,0]==x1[2,1,4]
 @test x1[1,1,0]==x1[4,1,4]
+
+println("Pass cubed sphere 2D test")
+
+
+# 2d array example XY exchange
+
+x=reshape(collect(0:15).+1,(4,4));
+x2=CyclicArray(x,"2DXY")
+@test x2[1,9]==1
+@test x2[1,10]==5
+@test x2[9,1]==1
+@test x2[10,1]==2
+
+println("Pass 2D exchange test")
+
+# 2d array example XY exchange
+
+x=reshape(collect(0:15).+1,(1,4,4));
+x2=CyclicArray(x,"3DXY")
+@test x2[1,1,9]==1
+@test x2[1,1,10]==5
+@test x2[1,9,1]==1
+@test x2[1,10,1]==2
+
+println("Pass 3D exchange test")
+
+x=reshape(collect(0:15).+1,(4,4));
+nfaces=1;
+faces=zeros(nfaces,2,2,4);
+faces[1,1,1,:]=[1,2,2,1];
+faces[1,1,2,:]=[1,2,1,1];
+faces[1,2,1,:]=[1,1,2,0];
+faces[1,2,2,:]=[1,1,1,0];
+
+x2=CyclicArray(x,faces)
+
+@test x2[1,5] == 13
+@test x2[1,0] == 16
+@test x2[0,1] == 13
+@test x2[5,1] == 1
+
+println("Pass 2D flip test")
