@@ -50,11 +50,14 @@ module CyclicArrays
     end
  end
 
+
+ Base.show(io::IO, ::MIME"text/plain", A::CyclicArray{T,1}) where{T} =
+           print(io, length(A),"-element CyclicArray{$T,1}:\n   ", A.data)
+
  Base.size(A::CyclicArray) = size(A.data)
  CyclicArray(x::CyclicArray)=CyclicArray([],x.connections)
  CyclicArray(x::AbstractArray,y::CyclicArray)=CyclicArray(x,y.connections)
  CyclicArray(connections::Array{T,4}) where T =CyclicArray([],connections)
- 
  
  function MakeCyclicArray(x::AbstractArray,str::String)
   if str=="1D"
