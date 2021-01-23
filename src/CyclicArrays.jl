@@ -66,11 +66,11 @@ module CyclicArrays
     faces[1,1,2,:]=[1,1,1,0];
   elseif str=="1D2F"
       nfaces=2;
-      faces=zeros(nfaces,1,2,4);
-      faces[1,1,1,:]=[2,1,2,0];
-      faces[1,1,2,:]=[2,1,1,0];
-      faces[2,1,1,:]=[1,1,2,0];
-      faces[2,1,2,:]=[1,1,1,0];
+    faces=zeros(nfaces,1,2,4);
+    faces[1,1,1,:]=[2,1,2,0];
+    faces[1,1,2,:]=[2,1,1,0];
+    faces[2,1,1,:]=[1,1,2,0];
+    faces[2,1,2,:]=[1,1,1,0];
   elseif str=="2D"
     nfaces=1;
     faces=zeros(nfaces,2,2,4);
@@ -85,6 +85,13 @@ module CyclicArrays
     faces[1,1,2,:]=[1,2,1,0];
     faces[1,2,1,:]=[1,1,2,0];
     faces[1,2,2,:]=[1,1,1,0];
+  elseif str=="2DFL"
+    nfaces=1;
+    faces=zeros(nfaces,2,2,4);
+    faces[1,1,1,:]=[1,1,2,1];
+    faces[1,1,2,:]=[1,1,1,1];
+    faces[1,2,1,:]=[1,2,2,1];
+    faces[1,2,2,:]=[1,2,1,1];
   elseif str=="3D"
     nfaces=1;
     faces=zeros(nfaces,3,2,4);
@@ -641,11 +648,13 @@ Shifts array by an integer
 end
 
 function Base.getindex(A::CyclicArray, I::Vararg{Int, N}) where N # implements A[I]
-    I1=CalcIndex(A,I...)
-  return Base.getindex(A.data,I1...)
+  I1=CalcIndex(A,I...)
+  if all(isnan.([I1[i] for i in N]))
+    return NaN
+  else
+    return Base.getindex(A.data,I1...)
+  end
 end
-
-Base.getindex(A::CyclicArray, I) = [ Base.getindex(A::CyclicArray, i) for i in I]
 
 function Base.setindex!(A::CyclicArray,value,I::Vararg{Int, N}) where N # A[I] = value
     I1=CalcIndex(A,I...)
