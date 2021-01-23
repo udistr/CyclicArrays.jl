@@ -86,3 +86,41 @@ Example examples/RandomFlow_2D.jl simulates the trajectories of a particle cloud
 f(y,x) = sin(x) + sin(y)
 
 ![Advection1D](https://raw.githubusercontent.com/udistr/CyclicArrays.jl/master/docs/images/RandomFlow_2D.gif)
+
+
+
+## Connections
+
+The generality of CyclicArrays allows for the generation of various grid types. Below are three examples, each with five moving particles.
+* The first example (left) shows the trivial case where a particle that exits the right edge enters from the left. Similarly, a particle that leaves the top edge enters from the bottom.
+* The middle animation shows a case in which the x-y directions are switched. When a particle exists from the right edge (x-direction), it enters from the bottom edge (y-direction). When a particle exits from the top edge, it enters from the left.
+* The right animation illustrates a case in which the dimensions are flipped. When a Particle exits from the right side edge at the bottom, it enters from the top of the left edge. When a particle exits from the right side of the top edge, it enters from the left side of the bottom edge.
+
+
+
+<p align="center"><img src="https://raw.githubusercontent.com/udistr/CyclicArrays.jl/master/Images/RandomFlow_2D_RG.gif" height=300> <img src="https://raw.githubusercontent.com/udistr/CyclicArrays.jl/master/Images/RandomFlow_2D_AX.gif" height=300><img src="https://raw.githubusercontent.com/udistr/CyclicArrays.jl/master/Images/RandomFlow_2D_FL.gif" height=300></p>
+
+
+## Unbounded array
+
+An additional CyclicArrays usage is for working with array that produce no BoundsError. 
+
+Define 1D grid with no connections:
+```
+nfaces=1;ndims=1;
+faces=zeros(nfaces,ndims,2,4);
+faces.=-1;
+```
+Define array:
+```
+x=[0:3;]
+x1=CyclicArray(x,faces)
+```
+Then, for out of bounds indexes, CyclicArrays returns NaN:
+```
+julia> x1[0]
+NaN
+```
+
+
+
