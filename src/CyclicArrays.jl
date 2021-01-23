@@ -383,14 +383,14 @@ Shifts array by an integer
           axis=connections[f,1,1,2];
           side=connections[f,1,1,3];
           flip=connections[f,1,1,4];
-          I2[N0] = kd(axis,1) * kd(side,1) * (1-i)   +
-                  kd(axis,1) * kd(side,2) * (nx+i) +
-                  kd(axis,2) * kd(flip,0) *  j     +
-                  kd(axis,2) * kd(flip,1) * (nx+1-j)
+          I2[N0] = kd(axis,1) * kd(side,1) * (1-i)  +
+                   kd(axis,1) * kd(side,2) * (nx+i) +
+                   kd(axis,2) * kd(flip,0) *  j     +
+                   kd(axis,2) * kd(flip,1) * (nx+1-j)
           I2[N0-1] = kd(axis,1) * kd(flip,0) *  j +
-                    kd(axis,1) * kd(flip,1) * (ny+1+j) +
-                    kd(axis,2) * kd(side,1) * (1-i) +
-                    kd(axis,2) * kd(side,2) * (ny+i)
+                     kd(axis,1) * kd(flip,1) * (ny+1-j) +
+                     kd(axis,2) * kd(side,1) * (1-i) +
+                     kd(axis,2) * kd(side,2) * (ny+i)
           I2[N0-2] = k
           if nfaces>1; I2[N0-3]=f1 end
           I1=I2
@@ -406,13 +406,13 @@ Shifts array by an integer
           side=connections[f,1,2,3];
           flip=connections[f,1,2,4];
           I2[N0] = kd(axis,1) * kd(side,1) * (i-nx)   +
-                  kd(axis,1) * kd(side,2) * ((nx+1)-(i-nx)) +
-                  kd(axis,2) * kd(flip,0) *  j     +
-                  kd(axis,2) * kd(flip,1) * (nx+1-j)
+                   kd(axis,1) * kd(side,2) * (nx-(i-nx-1)) +
+                   kd(axis,2) * kd(flip,0) *  j     +
+                   kd(axis,2) * kd(flip,1) * (nx+1-j)
           I2[N0-1] = kd(axis,1) * kd(flip,0) *  j +
-                    kd(axis,1) * kd(flip,1) * (ny+1+j) +
-                    kd(axis,2) * kd(side,1) * (i-ny) +
-                    kd(axis,2) * kd(side,2) * ((ny+1)-(i-ny))
+                     kd(axis,1) * kd(flip,1) * (ny+1-j) +
+                     kd(axis,2) * kd(side,1) * (i-ny) +
+                     kd(axis,2) * kd(side,2) * ((ny+1)-(i-ny))
           I2[N0-2] = k
           if nfaces>1; I2[N0-3]=f1 end
           I1=I2
@@ -428,14 +428,14 @@ Shifts array by an integer
           axis=connections[f,2,1,2];
           side=connections[f,2,1,3];
           flip=connections[f,2,1,4];
-          I2[N0] = kd(axis,1) * kd(side,1) * (1-i)   +
-                  kd(axis,1) * kd(side,2) * (nx-j) +
-                  kd(axis,2) * kd(flip,0) *  i     +
-                  kd(axis,2) * kd(flip,1) * (nx+1-i)
+          I2[N0] = kd(axis,1) * kd(side,1) * (1-j) +
+                   kd(axis,1) * kd(side,2) *  (nx+j) +
+                   kd(axis,2) * kd(flip,0) * i +
+                   kd(axis,2) * kd(flip,1) * (nx+1-i)
           I2[N0-1] = kd(axis,1) * kd(flip,0) *  i +
-                    kd(axis,1) * kd(flip,1) * (ny+1-i) +
-                    kd(axis,2) * kd(side,1) * (1-j) +
-                    kd(axis,2) * kd(side,2) * (ny+j)
+                     kd(axis,1) * kd(flip,1) * (ny+1-i) +
+                     kd(axis,2) * kd(side,1) * (1-j) +
+                     kd(axis,2) * kd(side,2) * (ny+j)
           I2[N0-2] = k
           if nfaces>1; I2[N0-3]=f1 end
           I1=I2
@@ -457,7 +457,7 @@ Shifts array by an integer
           I2[N0-1] = kd(axis,1) * kd(flip,0) *  i +
                     kd(axis,1) * kd(flip,1) * (ny+1-i) +
                     kd(axis,2) * kd(side,1) * (j-ny) +
-                    kd(axis,2) * kd(side,2) * (ny+1-(ny-j))
+                    kd(axis,2) * kd(side,2) * (ny+1-(j-ny))
           I2[N0-2] = k
           if nfaces>1; I2[N0-3]=f1 end
           I1=I2
@@ -519,14 +519,14 @@ Shifts array by an integer
           axis=connections[f,1,1,2];
           side=connections[f,1,1,3];
           flip=connections[f,1,1,4];
-          I2[N0] = kd(axis,1) * kd(side,1) * (1-i)   +
-                  kd(axis,1) * kd(side,2) * (nx+i) +
-                  kd(axis,2) * kd(flip,0) *  j     +
-                  kd(axis,2) * kd(flip,1) * (nx+1-j)
+          I2[N0] = kd(axis,1) * kd(side,1) * (1-i)  +
+                   kd(axis,1) * kd(side,2) * (nx+i) +
+                   kd(axis,2) * kd(flip,0) *  j     +
+                   kd(axis,2) * kd(flip,1) * (nx+1-j)
           I2[N0-1] = kd(axis,1) * kd(flip,0) *  j +
-                    kd(axis,1) * kd(flip,1) * (ny+1+j) +
-                    kd(axis,2) * kd(side,1) * (1-i) +
-                    kd(axis,2) * kd(side,2) * (ny+i)
+                     kd(axis,1) * kd(flip,1) * (ny+1-j) +
+                     kd(axis,2) * kd(side,1) * (1-i) +
+                     kd(axis,2) * kd(side,2) * (ny+i)
           if nfaces>1; I2[N0-2]=f1 end
           I1=I2
           i=I1[N0]; j=I1[N0-1]
@@ -541,13 +541,13 @@ Shifts array by an integer
           side=connections[f,1,2,3];
           flip=connections[f,1,2,4];
           I2[N0] = kd(axis,1) * kd(side,1) * (i-nx)   +
-                  kd(axis,1) * kd(side,2) * ((nx+1)-(i-nx)) +
-                  kd(axis,2) * kd(flip,0) *  j     +
-                  kd(axis,2) * kd(flip,1) * (nx+1-j)
+                   kd(axis,1) * kd(side,2) * (nx-(i-nx-1)) +
+                   kd(axis,2) * kd(flip,0) *  j     +
+                   kd(axis,2) * kd(flip,1) * (nx+1-j)
           I2[N0-1] = kd(axis,1) * kd(flip,0) *  j +
-                    kd(axis,1) * kd(flip,1) * (ny+1+j) +
-                    kd(axis,2) * kd(side,1) * (i-ny) +
-                    kd(axis,2) * kd(side,2) * ((ny+1)-(i-ny))
+                     kd(axis,1) * kd(flip,1) * (ny+1-j) +
+                     kd(axis,2) * kd(side,1) * (i-ny) +
+                     kd(axis,2) * kd(side,2) * ((ny+1)-(i-ny))
           if nfaces>1; I2[N0-2]=f1 end
           I1=I2
           i=I1[N0]; j=I1[N0-1]
@@ -562,14 +562,14 @@ Shifts array by an integer
           axis=connections[f,2,1,2];
           side=connections[f,2,1,3];
           flip=connections[f,2,1,4];
-          I2[N0] = kd(axis,1) * kd(side,1) * (1-i)   +
-                  kd(axis,1) * kd(side,2) * (nx-j) +
-                  kd(axis,2) * kd(flip,0) *  i     +
-                  kd(axis,2) * kd(flip,1) * (nx+1-i)
+          I2[N0] = kd(axis,1) * kd(side,1) * (1-j) +
+                   kd(axis,1) * kd(side,2) *  (nx+j) +
+                   kd(axis,2) * kd(flip,0) * i +
+                   kd(axis,2) * kd(flip,1) * (nx+1-i)
           I2[N0-1] = kd(axis,1) * kd(flip,0) *  i +
-                    kd(axis,1) * kd(flip,1) * (ny+1-i) +
-                    kd(axis,2) * kd(side,1) * (1-j) +
-                    kd(axis,2) * kd(side,2) * (ny+j)
+                     kd(axis,1) * kd(flip,1) * (ny+1-i) +
+                     kd(axis,2) * kd(side,1) * (1-j) +
+                     kd(axis,2) * kd(side,2) * (ny+j)
           if nfaces>1; I2[N0-2]=f1 end
           I1=I2
           i=I1[N0]; j=I1[N0-1]
@@ -590,7 +590,7 @@ Shifts array by an integer
           I2[N0-1] = kd(axis,1) * kd(flip,0) *  i +
                     kd(axis,1) * kd(flip,1) * (ny+1-i) +
                     kd(axis,2) * kd(side,1) * (j-ny) +
-                    kd(axis,2) * kd(side,2) * (ny+1-(ny-j))
+                    kd(axis,2) * kd(side,2) * (ny+1-(j-ny))
           if nfaces>1; I2[N0-2]=f1 end
           I1=I2
           i=I1[N0]; j=I1[N0-1]
@@ -670,14 +670,14 @@ function Base.setindex!(A::CyclicArray,value,I::Vararg{Int, N}) where N # A[I] =
           axis=connections[f,1,1,2];
           side=connections[f,1,1,3];
           flip=connections[f,1,1,4];
-          I2[N0] = kd(axis,1) * kd(side,1) * (1-i)   +
-                  kd(axis,1) * kd(side,2) * (nx+i) +
-                  kd(axis,2) * kd(flip,0) *  j     +
-                  kd(axis,2) * kd(flip,1) * (nx+1-j)
+          I2[N0] = kd(axis,1) * kd(side,1) * (1-i)  +
+                   kd(axis,1) * kd(side,2) * (nx+i) +
+                   kd(axis,2) * kd(flip,0) *  j     +
+                   kd(axis,2) * kd(flip,1) * (nx+1-j)
           I2[N0-1] = kd(axis,1) * kd(flip,0) *  j +
-                    kd(axis,1) * kd(flip,1) * (ny+1+j) +
-                    kd(axis,2) * kd(side,1) * (1-i) +
-                    kd(axis,2) * kd(side,2) * (ny+i)
+                     kd(axis,1) * kd(flip,1) * (ny+1-j) +
+                     kd(axis,2) * kd(side,1) * (1-i) +
+                     kd(axis,2) * kd(side,2) * (ny+i)
           I2[N0-2] = k
           if nfaces>1; I2[N0-3]=f1 end
           I1=I2
@@ -693,13 +693,13 @@ function Base.setindex!(A::CyclicArray,value,I::Vararg{Int, N}) where N # A[I] =
           side=connections[f,1,2,3];
           flip=connections[f,1,2,4];
           I2[N0] = kd(axis,1) * kd(side,1) * (i-nx)   +
-                  kd(axis,1) * kd(side,2) * ((nx+1)-(i-nx)) +
-                  kd(axis,2) * kd(flip,0) *  j     +
-                  kd(axis,2) * kd(flip,1) * (nx+1-j)
+                   kd(axis,1) * kd(side,2) * (nx-(i-nx-1)) +
+                   kd(axis,2) * kd(flip,0) *  j     +
+                   kd(axis,2) * kd(flip,1) * (nx+1-j)
           I2[N0-1] = kd(axis,1) * kd(flip,0) *  j +
-                    kd(axis,1) * kd(flip,1) * (ny+1+j) +
-                    kd(axis,2) * kd(side,1) * (i-ny) +
-                    kd(axis,2) * kd(side,2) * ((ny+1)-(i-ny))
+                     kd(axis,1) * kd(flip,1) * (ny+1-j) +
+                     kd(axis,2) * kd(side,1) * (i-ny) +
+                     kd(axis,2) * kd(side,2) * ((ny+1)-(i-ny))
           I2[N0-2] = k
           if nfaces>1; I2[N0-3]=f1 end
           I1=I2
@@ -715,14 +715,14 @@ function Base.setindex!(A::CyclicArray,value,I::Vararg{Int, N}) where N # A[I] =
           axis=connections[f,2,1,2];
           side=connections[f,2,1,3];
           flip=connections[f,2,1,4];
-          I2[N0] = kd(axis,1) * kd(side,1) * (1-i)   +
-                  kd(axis,1) * kd(side,2) * (nx-j) +
-                  kd(axis,2) * kd(flip,0) *  i     +
-                  kd(axis,2) * kd(flip,1) * (nx+1-i)
+          I2[N0] = kd(axis,1) * kd(side,1) * (1-j) +
+                   kd(axis,1) * kd(side,2) *  (nx+j) +
+                   kd(axis,2) * kd(flip,0) * i +
+                   kd(axis,2) * kd(flip,1) * (nx+1-i)
           I2[N0-1] = kd(axis,1) * kd(flip,0) *  i +
-                    kd(axis,1) * kd(flip,1) * (ny+1-i) +
-                    kd(axis,2) * kd(side,1) * (1-j) +
-                    kd(axis,2) * kd(side,2) * (ny+j)
+                     kd(axis,1) * kd(flip,1) * (ny+1-i) +
+                     kd(axis,2) * kd(side,1) * (1-j) +
+                     kd(axis,2) * kd(side,2) * (ny+j)
           I2[N0-2] = k
           if nfaces>1; I2[N0-3]=f1 end
           I1=I2
@@ -744,7 +744,7 @@ function Base.setindex!(A::CyclicArray,value,I::Vararg{Int, N}) where N # A[I] =
           I2[N0-1] = kd(axis,1) * kd(flip,0) *  i +
                     kd(axis,1) * kd(flip,1) * (ny+1-i) +
                     kd(axis,2) * kd(side,1) * (j-ny) +
-                    kd(axis,2) * kd(side,2) * (ny+1-(ny-j))
+                    kd(axis,2) * kd(side,2) * (ny+1-(j-ny))
           I2[N0-2] = k
           if nfaces>1; I2[N0-3]=f1 end
           I1=I2
@@ -806,14 +806,14 @@ function Base.setindex!(A::CyclicArray,value,I::Vararg{Int, N}) where N # A[I] =
           axis=connections[f,1,1,2];
           side=connections[f,1,1,3];
           flip=connections[f,1,1,4];
-          I2[N0] = kd(axis,1) * kd(side,1) * (1-i)   +
-                  kd(axis,1) * kd(side,2) * (nx+i) +
-                  kd(axis,2) * kd(flip,0) *  j     +
-                  kd(axis,2) * kd(flip,1) * (nx+1-j)
+          I2[N0] = kd(axis,1) * kd(side,1) * (1-i)  +
+                   kd(axis,1) * kd(side,2) * (nx+i) +
+                   kd(axis,2) * kd(flip,0) *  j     +
+                   kd(axis,2) * kd(flip,1) * (nx+1-j)
           I2[N0-1] = kd(axis,1) * kd(flip,0) *  j +
-                    kd(axis,1) * kd(flip,1) * (ny+1+j) +
-                    kd(axis,2) * kd(side,1) * (1-i) +
-                    kd(axis,2) * kd(side,2) * (ny+i)
+                     kd(axis,1) * kd(flip,1) * (ny+1-j) +
+                     kd(axis,2) * kd(side,1) * (1-i) +
+                     kd(axis,2) * kd(side,2) * (ny+i)
           if nfaces>1; I2[N0-2]=f1 end
           I1=I2
           i=I1[N0]; j=I1[N0-1]
@@ -828,13 +828,13 @@ function Base.setindex!(A::CyclicArray,value,I::Vararg{Int, N}) where N # A[I] =
           side=connections[f,1,2,3];
           flip=connections[f,1,2,4];
           I2[N0] = kd(axis,1) * kd(side,1) * (i-nx)   +
-                  kd(axis,1) * kd(side,2) * ((nx+1)-(i-nx)) +
-                  kd(axis,2) * kd(flip,0) *  j     +
-                  kd(axis,2) * kd(flip,1) * (nx+1-j)
+                   kd(axis,1) * kd(side,2) * (nx-(i-nx-1)) +
+                   kd(axis,2) * kd(flip,0) *  j     +
+                   kd(axis,2) * kd(flip,1) * (nx+1-j)
           I2[N0-1] = kd(axis,1) * kd(flip,0) *  j +
-                    kd(axis,1) * kd(flip,1) * (ny+1+j) +
-                    kd(axis,2) * kd(side,1) * (i-ny) +
-                    kd(axis,2) * kd(side,2) * ((ny+1)-(i-ny))
+                     kd(axis,1) * kd(flip,1) * (ny+1-j) +
+                     kd(axis,2) * kd(side,1) * (i-ny) +
+                     kd(axis,2) * kd(side,2) * ((ny+1)-(i-ny))
           if nfaces>1; I2[N0-2]=f1 end
           I1=I2
           i=I1[N0]; j=I1[N0-1]
@@ -849,14 +849,14 @@ function Base.setindex!(A::CyclicArray,value,I::Vararg{Int, N}) where N # A[I] =
           axis=connections[f,2,1,2];
           side=connections[f,2,1,3];
           flip=connections[f,2,1,4];
-          I2[N0] = kd(axis,1) * kd(side,1) * (1-i)   +
-                  kd(axis,1) * kd(side,2) * (nx-j) +
-                  kd(axis,2) * kd(flip,0) *  i     +
-                  kd(axis,2) * kd(flip,1) * (nx+1-i)
+          I2[N0] = kd(axis,1) * kd(side,1) * (1-j) +
+                   kd(axis,1) * kd(side,2) *  (nx+j) +
+                   kd(axis,2) * kd(flip,0) * i +
+                   kd(axis,2) * kd(flip,1) * (nx+1-i)
           I2[N0-1] = kd(axis,1) * kd(flip,0) *  i +
-                    kd(axis,1) * kd(flip,1) * (ny+1-i) +
-                    kd(axis,2) * kd(side,1) * (1-j) +
-                    kd(axis,2) * kd(side,2) * (ny+j)
+                     kd(axis,1) * kd(flip,1) * (ny+1-i) +
+                     kd(axis,2) * kd(side,1) * (1-j) +
+                     kd(axis,2) * kd(side,2) * (ny+j)
           if nfaces>1; I2[N0-2]=f1 end
           I1=I2
           i=I1[N0]; j=I1[N0-1]
@@ -877,7 +877,7 @@ function Base.setindex!(A::CyclicArray,value,I::Vararg{Int, N}) where N # A[I] =
           I2[N0-1] = kd(axis,1) * kd(flip,0) *  i +
                     kd(axis,1) * kd(flip,1) * (ny+1-i) +
                     kd(axis,2) * kd(side,1) * (j-ny) +
-                    kd(axis,2) * kd(side,2) * (ny+1-(ny-j))
+                    kd(axis,2) * kd(side,2) * (ny+1-(j-ny))
           if nfaces>1; I2[N0-2]=f1 end
           I1=I2
           i=I1[N0]; j=I1[N0-1]

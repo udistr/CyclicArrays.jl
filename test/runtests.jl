@@ -248,7 +248,6 @@ x2=CyclicArray(x,"3DXY")
 
 println("Pass 3D exchange test")
 
-x=reshape(collect(0:15).+1,(4,4));
 nfaces=1;
 faces=zeros(nfaces,2,2,4);
 faces[1,1,1,:]=[1,2,2,1];
@@ -256,6 +255,7 @@ faces[1,1,2,:]=[1,2,1,1];
 faces[1,2,1,:]=[1,1,2,0];
 faces[1,2,2,:]=[1,1,1,0];
 
+x=reshape(collect(0:15).+1,(4,4));
 x2=CyclicArray(x,faces)
 
 @test x2[1,5] == 13
@@ -263,4 +263,239 @@ x2=CyclicArray(x,faces)
 @test x2[0,1] == 13
 @test x2[5,1] == 1
 
+nfaces=1;
+faces=zeros(nfaces,2,2,4);
+faces[1,1,1,:]=[1,1,2,1];
+faces[1,1,2,:]=[1,1,1,1];
+faces[1,2,1,:]=[1,2,2,1];
+faces[1,2,2,:]=[1,2,1,1];
+
+x=reshape(collect(0:15) .+1,(4,4));
+x2=CyclicArray(x,faces)
+
+
+@test x2[1,0]==x2[4,4]
+@test x2[1,5]==x2[4,1]
+@test x2[0,1]==x2[4,4]
+@test x2[5,1]==x2[1,4]
+
+x=reshape(collect(0:15) .+1,(4,4));
+nfaces=1;
+faces=zeros(nfaces,2,2,4);
+faces[1,1,1,:]=[1,1,1,0];
+faces[1,1,2,:]=[1,1,2,0];
+faces[1,2,1,:]=[1,2,1,0];
+faces[1,2,2,:]=[1,2,2,0];
+
+x2=CyclicArray(x,faces)
+@test x2[1,0]==x2[1,1]
+@test x2[1,5]==x2[1,4]
+@test x2[0,1]==x2[1,1]
+@test x2[5,1]==x2[4,1]
+
 println("Pass 2D flip test")
+
+# tests by sides
+
+x=reshape(collect(0:15) .+1,(4,4));
+nfaces=1;
+faces=zeros(nfaces,2,2,4);
+faces[1,1,1,:]=[1,1,1,0];
+faces[1,1,2,:]=[1,1,1,0];
+faces[1,2,1,:]=[1,1,1,0];
+faces[1,2,2,:]=[1,1,1,0];
+faces[1,1,1,:]=[1,2,2,0];
+
+
+faces[1,1,1,:]=[1,1,1,0];
+x2=CyclicArray(x,faces)
+@test x2[1,0]==x2[1,1]
+@test x2[1,-1]==x2[1,2]
+
+faces[1,1,1,:]=[1,2,1,0];
+x2=CyclicArray(x,faces)
+@test x2[1,0]==x2[1,1]
+@test x2[1,-1]==x2[2,1]
+
+faces[1,1,1,:]=[1,1,2,0];
+x2=CyclicArray(x,faces)
+@test x2[1,0]==x2[1,4]
+@test x2[1,-1]==x2[1,3]
+
+faces[1,1,1,:]=[1,2,2,0];
+x2=CyclicArray(x,faces)
+@test x2[1,0]==x2[4,1]
+@test x2[1,-1]==x2[3,1]
+#
+faces[1,1,1,:]=[1,1,1,1];
+x2=CyclicArray(x,faces)
+@test x2[1,0]==x2[4,1]
+@test x2[1,-1]==x2[4,2]
+
+faces[1,1,1,:]=[1,2,1,1];
+x2=CyclicArray(x,faces)
+@test x2[1,0]==x2[1,4]
+@test x2[1,-1]==x2[2,4]
+
+faces[1,1,1,:]=[1,1,2,1];
+x2=CyclicArray(x,faces)
+@test x2[1,0]==x2[4,4]
+@test x2[1,-1]==x2[4,3]
+
+faces[1,1,1,:]=[1,2,2,1];
+x2=CyclicArray(x,faces)
+@test x2[1,0]==x2[4,4]
+@test x2[1,-1]==x2[3,4]
+
+println("Pass tests by sides 2D 1")
+
+faces[1,1,2,:]=[1,1,1,0];
+x2=CyclicArray(x,faces)
+@test x2[1,5]==x2[1,1]
+@test x2[1,6]==x2[1,2]
+
+faces[1,1,2,:]=[1,2,1,0];
+x2=CyclicArray(x,faces)
+@test x2[1,5]==x2[1,1]
+@test x2[1,6]==x2[2,1]
+
+faces[1,1,2,:]=[1,1,2,0];
+x2=CyclicArray(x,faces)
+@test x2[1,5]==x2[1,4]
+@test x2[1,6]==x2[1,3]
+
+faces[1,1,2,:]=[1,2,2,0];
+x2=CyclicArray(x,faces)
+@test x2[1,5]==x2[4,1]
+@test x2[1,6]==x2[3,1]
+#
+faces[1,1,2,:]=[1,1,1,1];
+x2=CyclicArray(x,faces)
+@test x2[1,5]==x2[4,1]
+@test x2[1,6]==x2[4,2]
+
+faces[1,1,2,:]=[1,2,1,1];
+x2=CyclicArray(x,faces)
+@test x2[1,5]==x2[1,4]
+@test x2[1,6]==x2[2,4]
+
+faces[1,1,2,:]=[1,1,2,1];
+x2=CyclicArray(x,faces)
+@test x2[1,5]==x2[4,4]
+@test x2[1,6]==x2[4,3]
+
+faces[1,1,2,:]=[1,2,2,1];
+x2=CyclicArray(x,faces)
+@test x2[1,5]==x2[4,4]
+@test x2[1,6]==x2[3,4]
+
+println("Pass tests by sides 2D 2")
+
+
+faces[1,2,1,:]=[1,1,1,0];
+x2=CyclicArray(x,faces)
+@test x2[0,1]==x2[1,1]
+@test x2[-1,1]==x2[1,2]
+
+faces[1,2,1,:]=[1,2,1,0];
+x2=CyclicArray(x,faces)
+@test x2[0,1]==x2[1,1]
+@test x2[-1,1]==x2[2,1]
+
+faces[1,2,1,:]=[1,1,2,0];
+x2=CyclicArray(x,faces)
+@test x2[0,1]==x2[1,4]
+@test x2[-1,1]==x2[1,3]
+
+faces[1,2,1,:]=[1,2,2,0];
+x2=CyclicArray(x,faces)
+@test x2[0,1]==x2[4,1]
+@test x2[-1,1]==x2[3,1]
+#
+faces[1,2,1,:]=[1,1,1,1];
+x2=CyclicArray(x,faces)
+@test x2[0,1]==x2[4,1]
+@test x2[-1,1]==x2[4,2]
+
+faces[1,2,1,:]=[1,2,1,1];
+x2=CyclicArray(x,faces)
+@test x2[0,1]==x2[1,4]
+@test x2[-1,1]==x2[2,4]
+
+faces[1,2,1,:]=[1,1,2,1];
+x2=CyclicArray(x,faces)
+@test x2[0,1]==x2[4,4]
+@test x2[-1,1]==x2[4,3]
+
+faces[1,2,1,:]=[1,2,2,1];
+x2=CyclicArray(x,faces)
+@test x2[0,1]==x2[4,4]
+@test x2[-1,1]==x2[3,4]
+
+println("Pass tests by sides 2D 3")
+
+faces[1,2,2,:]=[1,2,1,0];
+x2=CyclicArray(x,faces)
+@test x2[5,1]==x2[1,1]
+@test x2[6,1]==x2[2,1]
+
+faces[1,2,2,:]=[1,1,2,0];
+x2=CyclicArray(x,faces)
+@test x2[5,1]==x2[1,4]
+@test x2[6,1]==x2[1,3]
+
+faces[1,2,2,:]=[1,2,2,0];
+x2=CyclicArray(x,faces)
+@test x2[5,1]==x2[4,1]
+@test x2[6,1]==x2[3,1]
+#
+faces[1,2,2,:]=[1,1,1,1];
+x2=CyclicArray(x,faces)
+@test x2[5,1]==x2[4,1]
+@test x2[6,1]==x2[4,2]
+
+faces[1,2,2,:]=[1,2,1,1];
+x2=CyclicArray(x,faces)
+@test x2[5,1]==x2[1,4]
+@test x2[6,1]==x2[2,4]
+
+faces[1,2,2,:]=[1,1,2,1];
+x2=CyclicArray(x,faces)
+@test x2[5,1]==x2[4,4]
+@test x2[6,1]==x2[4,3]
+
+faces[1,2,2,:]=[1,2,2,1];
+x2=CyclicArray(x,faces)
+@test x2[5,1]==x2[4,4]
+@test x2[6,1]==x2[3,4]
+
+println("Pass tests by sides 2D 4")
+
+faces=zeros(1,1,2,4);
+faces[1,1,1,:]=[1,1,2,0];
+faces[1,1,2,:]=[1,1,1,0];
+
+x=[0:3;]
+x1=CyclicArray(x,faces)
+
+faces[1,1,1,:]=[1,1,1,0];
+x1=CyclicArray(x,faces)
+x1[0]==x1[1]
+x1[-1]==x1[2]
+
+faces[1,1,1,:]=[1,1,2,0];
+x1=CyclicArray(x,faces)
+x1[0]==x1[4]
+x1[-1]==x1[3]
+
+faces[1,1,2,:]=[1,1,1,0];
+x1=CyclicArray(x,faces)
+x1[5]==x1[1]
+x1[6]==x1[2]
+
+faces[1,1,2,:]=[1,1,2,0];
+x1=CyclicArray(x,faces)
+x1[5]==x1[4]
+x1[6]==x1[3]
+
+println("Pass tests by sides 1D")
