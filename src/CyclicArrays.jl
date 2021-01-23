@@ -25,13 +25,21 @@ module CyclicArrays
  ```
  CyclicArray(x::AbstractArray,str::String)
  ```
- Avilable options:
+ Available options:
 
   "1D" - one dimensional array, one face
 
+  "1D2F" - one dimensional array, two faces
+
   "2D" - two dimensional array, one face
 
+  "2DXY" - two dimensional array, one face, switching x-y directions
+
+  "2DFL" - two dimensional array, one face, flip sides
+
   "3D" - three dimensional array, one face
+
+  "3DXY" - three dimensional array, one face, switching x-y directions
 
   "cubed" - cubed sphere, three dimensional array, six faces
 
