@@ -10,6 +10,9 @@
 
 CyclicArrays allow for the intuitive definition of a circular domain composed of one or more arrays, where the faces of the arrays are interconnected. Each array will have two directions (positive and negative) and up to three space dimensions (x,y,z). After the definition of the connection between different faces, out-of-boundary indexes will be permitted. The CyclicArray structure includes two fields - data array and connection array. The data array containing the data values and the connection array containing the information on the connections between faces and their sides.
 
+--- CyclicArrays.jl is a generalization of CircularArrays.jl package for various grid topologies (see section Connections below for more details) ---
+
+
 ## The connection array
 
 The connection array is a four-dimensional array defining the connections between faces:
