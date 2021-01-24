@@ -98,7 +98,7 @@ The generality of CyclicArrays allows for the generation of various grid types. 
 
 
 
-<p align="center"><img src="https://raw.githubusercontent.com/udistr/CyclicArrays.jl/master/Images/RandomFlow_2D_RG.gif" height=300> <img src="https://raw.githubusercontent.com/udistr/CyclicArrays.jl/master/Images/RandomFlow_2D_AX.gif" height=300><img src="https://raw.githubusercontent.com/udistr/CyclicArrays.jl/master/Images/RandomFlow_2D_FL.gif" height=300></p>
+<p align="center"><img src="https://raw.githubusercontent.com/udistr/CyclicArrays.jl/master/Images/RandomFlow2DRG.gif" height=300> <img src="https://raw.githubusercontent.com/udistr/CyclicArrays.jl/master/Images/RandomFlow2DAX.gif" height=300><img src="https://raw.githubusercontent.com/udistr/CyclicArrays.jl/master/Images/RandomFlow2DFL.gif" height=300></p>
 
 
 ## Unbounded array
