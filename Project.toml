@@ -1,7 +1,7 @@
 name = "CyclicArrays"
 uuid = "6023044f-b3ef-4c22-8399-3ec90a0c9b75"
 authors = ["udistr <udistr@gmail.com>"]
-version = "0.4.8"
+version = "0.5.0"
 
 [compat]
 julia = "1"
