@@ -57,11 +57,11 @@ CyclicArray(x::AbstractArray,str::String)
 
 The generality of CyclicArrays allows for the generation of various grid types. Below are three examples, each with five moving particles.
 
-a) The first example (left) shows the trivial case where a particle that exits the right edge enters from the left. Similarly, a particle that leaves the top edge enters from the bottom. (predefined option "2D")
+a) The first example (a) shows the trivial case where a particle that exits the right edge enters from the left. Similarly, a particle that leaves the top edge enters from the bottom. (predefined option "2D")
 
-b) The middle animation shows a case in which the x-y directions are switched. When a particle exists from the right edge (x-direction), it enters from the bottom edge (y-direction). When a particle exits from the top edge, it enters from the left. (predefined option "2DXY")
+b) Animation (b) shows a case in which the x-y directions are switched. When a particle exists from the right edge (x-direction), it enters from the bottom edge (y-direction). When a particle exits from the top edge, it enters from the left. (predefined option "2DXY")
 
-c) The right animation illustrates a case in which the dimensions are flipped. When a Particle exits from the right side edge at the bottom, it enters from the top of the left edge. When a particle exits from the right side of the top edge, it enters from the left side of the bottom edge. (predefined option "2DFL")
+c) Animation (c) illustrates a case in which the dimensions are flipped. When a Particle exits from the right side edge at the bottom, it enters from the top of the left edge. When a particle exits from the right side of the top edge, it enters from the left side of the bottom edge. (predefined option "2DFL")
 
 <p align="center"><img src="Images/RandomFlow2DRG.gif" height=300> <img src="Images/RandomFlow2DAX.gif" height=300><img src="Images/RandomFlow2DFL.gif" height=300></p>
 
